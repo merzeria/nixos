@@ -24,7 +24,11 @@
   networking.hostName = "nixos";  # Define your hostname.
 
   # Enable Flakes feature
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  # nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  # Auto update system
+  system.autoUpgrade.enable = true;
+  system.autoUpgrade.allowReboot = false;
 
   # Configure network connections interactively with nmcli or nmtui.
   networking.networkmanager.enable = true; 
@@ -74,7 +78,7 @@
 
   # X server/login service. DEFAULT is LightDM
   # {
-  # services.displayManager.sddm.enable = true;
+   services.displayManager.sddm.enable = true;
   # services.displayManager.gdm.enable = true;
   # }
 
@@ -91,40 +95,31 @@
   # Enable sound.
   # services.pulseaudio.enable = true;
   # OR
-
-
  services.pipewire = {
     enable = true;
     pulse.enable = true;
  };
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.libinput.enable = true;
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
- 
  users.users.simon = {
    isNormalUser = true;
    home = "/home/simon";
    description = "Simon Halberg";
    extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
 	};
- 
+
   # Automatic login
-	
-	 services.displayManager.gdm.enable = true;
 	 services.displayManager.autoLogin.enable = true;
 	 services.displayManager.autoLogin.user = "simon";
 	
 
-  environment.systemPackages = [
+  environment.systemPackages = with pkgs; [
     pkgs.vesktop
     pkgs.floorp-bin
     pkgs.steam
     pkgs.pwvucontrol
     pkgs.protonplus
     pkgs.protontricks
-    pkgs.iconpack-obsidian
     pkgs.alsa-utils
   ];
 
