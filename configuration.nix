@@ -126,10 +126,13 @@
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
       kdePackages.kate
-      thunderbird
       vesktop
       floorp-bin
       pwvucontrol
+      gamescope-wsi
+      duckstation
+      pcsx2
+
     ];
   };
 
@@ -143,8 +146,9 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    vim
     wget
+    usbutils
   ];
 
   #Steam
@@ -155,6 +159,16 @@
 			localNetworkGameTransfers.openFirewall = true;
 		};
   };
+
+  # Enable Gamemode for better performance
+  programs.gamemode.enable = true;
+
+  # Should install proton-ge
+  programs.steam.extraCompatPackages = with pkgs; [
+    proton-ge-bin
+  ];
+
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
