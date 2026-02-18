@@ -130,22 +130,23 @@
 	
 
   environment.systemPackages = with pkgs; [
-    pkgs.vesktop
-    pkgs.floorp-bin
-    pkgs.steam
-    pkgs.pwvucontrol
-    pkgs.protonplus
-    pkgs.protontricks
-    pkgs.alsa-utils
-    pkgs.thunderbird-latest-unwrapped
+    vesktop
+    floorp-bin
+    pwvucontrol
+    protonplus
+    alsa-utils
+    thunderbird-latest-unwrapped
+	vim
+	wget
   ];
-
-  # List packages installed in system profile.
-  # You can use https://search.nixos.org/ to find more packages (and options).
-  # environment.systemPackages = with pkgs; [
-  #   vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #   wget
-  # ];
+	#Steam
+	programs ={
+		steam = { 
+			enable = true;
+			remotePlay.openFirewall = true;
+			localNetworkGameTransfers.openFirewall = true;
+		};
+};
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
