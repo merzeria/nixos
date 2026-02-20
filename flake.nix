@@ -31,10 +31,34 @@
             # 2 Your system‑wide options
             ./modules/system.nix
 
-            # 3 Plasma‑manager module (adds nice Plasma knobs)
+            # 3 Plasma‑manager module
             plasma-manager.nixosModules.plasma-manager
 
-            # 4 Home‑Manager integration
+            # 4 Themes
+            nixosConfigurations = {
+        # Two *named* configurations – just change the suffix to pick a theme
+        myhost-nordic = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            ./hardware-configuration.nix
+            ./modules/system.nix
+            (import ./modules/plasma.nix { inherit pkgs; themeName = "nordic"; })
+            ./modules/home.nix
+          ];
+        };
+
+        myhost-sweet = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            ./hardware-configuration.nix
+            ./modules/system.nix
+            (import ./modules/plasma.nix { inherit pkgs; themeName = "sweet"; })
+            ./modules/home.nix
+          ];
+        };
+      };
+      
+            # 5 Home‑Manager integration
             ({ config, pkgs, ... }: {
               home-manager.useUserPackages = true;
               home-manager.users.${username} = import ./modules/home.nix;
