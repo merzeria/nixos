@@ -1,33 +1,34 @@
+# modules/home.nix
 { config, pkgs, ... }:
 
 {
-  # Let Home Manager manage the user’s profile
-  home.stateVersion = "25.11";   # keep in sync with your NixOS version
+  # Home‑Manager version tracking – keep it in sync with your NixOS version
+  home.stateVersion = "25.11";
 
-  # Basic packages you probably want in your user environment
+  # Packages that should appear in the user’s `$HOME/.local/...` profile
   home.packages = with pkgs; [
+    # Keep the same list you had under users.users.simon.packages
+    vesktop
+    floorp-bin
+    pwvucontrol
+    gamescope-wsi
+    duckstation
+    pcsx2
+
+    # Anything else you want just for the user (feel free to add)
     neovim
     git
-    ripgrep
-    fd
     htop
-    wget
-    curl
   ];
 
-  # Example: enable Zsh with a simple prompt
+  # Extra groups – Home‑Manager can add the user to groups as well
+  users.users.simon = {
+    extraGroups = [ "networkmanager" "wheel" ];
+  };
+
+  # Example: enable Zsh (optional, you can delete if you use Bash)
   programs.zsh.enable = true;
   programs.zsh.promptInit = ''
     PROMPT='%F{cyan}%n@%m %F{yellow}%~ %F{reset}$ '
   '';
-
-  # Example: set a GTK theme (affects Qt apps too via qt5ct)
-  gtk = {
-    enable = true;
-    theme = "Adwaita-dark";
-    iconTheme = "Papirus-Dark";
-  };
-
-  # Example: enable the KDE Connect integration
-  services.kdeconnect.enable = true;
 }
