@@ -1,18 +1,9 @@
-sudo tee /etc/nixos/configuration.nix > /dev/null <<'EOF'
-{ config, pkgs, ... }:
+{ pkgs, ... }: {
+  imports = [ ./hardware-configuration.nix ];
 
-{
-  # Enable flakes and the newer Nix command
-  nix = {
-    package = pkgs.nixVersions.latest;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
-  };
+  # This is the ONLY thing needed to allow you to use your flake
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  # Import the flake we just built
-  imports = [
-    (builtins.getFlake "file:///home/simon/nixos-flake").nixosConfigurations.nixos.config
-  ];
+  # All other logic should be in ~/simonos/
+  system.stateVersion = "25.11";
 }
-EOF
