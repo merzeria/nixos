@@ -47,16 +47,16 @@
   # --------------------------------------------------------------
   # Graphics / NVIDIA
   # --------------------------------------------------------------
-  hardware.graphics.enable = true;
-  hardware.graphics.enable32Bit = true;
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true; # Critical for Steam/older games
+  };
 
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia = {
-    modesetting.enable = true;
+    modesetting.enable = true; # Required for Plasma 6 Wayland
     powerManagement.enable = false;
-    powerManagement.finegrained = false;
     open = true;
-    nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.beta;
   };
 
@@ -64,7 +64,10 @@
   # Display manager & Plasma
   # --------------------------------------------------------------
   services.xserver.enable = true;
-  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm = {
+    enable = true;
+    wayland.enable = true;
+  };
   services.desktopManager.plasma6.enable = true;
 
   # X11 keymap
@@ -107,23 +110,27 @@
   users.users.simon = {
     isNormalUser = true;
     description = "Simon Halberg";
-    extraGroups = [ "networkmanager" "wheel" ];
-    # Packages that belong to the *system* profile (not per‑user)
-    packages = with pkgs; [
-      floorp-bin
-      pwvucontrol
-      gamescope-wsi
-    ];
+    extraGroups = [ "networkmanager" "wheel" "video" "audio" ];
   };
+
+  # Make Zsh the default shell for the user system-wide
+  programs.zsh = {
+  enable = true;
+  enableCompletion = true;
+  autosuggestions.enable = true;
+  syntaxHighlighting.enable = true;
+  };
+  users.users.simon.shell = pkgs.zsh;
 
   # Automatic login (still handled by the system)
   services.displayManager.autoLogin.enable = true;
   services.displayManager.autoLogin.user = "simon";
 
   # --------------------------------------------------------------
-  # Unfree packages
+  # Unfree packages & Flatpaks
   # --------------------------------------------------------------
   nixpkgs.config.allowUnfree = true;
+  services.flatpak.enable = true;
 
   # --------------------------------------------------------------
   # Global system packages (outside of Home‑Manager)
@@ -136,15 +143,13 @@
   ];
 
   # --------------------------------------------------------------
-  # Steam
+  # Steam & Games
   # --------------------------------------------------------------
   programs.steam = {
     enable = true;
-    remotePlay.openFirewall = true;
-    localNetworkGameTransfers.openFirewall = true;
+    extraCompatPackages = with pkgs; [ proton-ge-bin ];
   };
   programs.gamemode.enable = true;
-  programs.steam.extraCompatPackages = with pkgs; [ proton-ge-bin ];
 
   # --------------------------------------------------------------
   # State version (keep what you already have)
