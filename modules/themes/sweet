@@ -1,0 +1,64 @@
+# modules/themes/sweet.nix
+{ pkgs, ... }:
+
+{
+  plasma-manager = {
+    user = "simon";
+
+    theme = {
+      name = "Sweet";
+      package = pkgs.kdePackages.plasma5-themes.sweet;
+
+      colorScheme = {
+        name = "Sweet";
+        # Sweet provides its own colour scheme; you can override with a custom file if desired.
+      };
+
+      icons = {
+        name = "Papirus-Light";               # Sweet is a light theme, Papirus‑Light fits nicely
+        package = pkgs.kdePackages.papirus-icon-theme;
+      };
+
+      cursor = {
+        name = "Breeze";
+        package = pkgs.kdePackages.breeze-cursor-theme;
+      };
+    };
+
+    kwin.decoration = {
+      name = "Sweet";
+      package = pkgs.kdePackages.plasma5-themes.sweet;
+    };
+
+    splash = {
+      name = "Sweet";
+      package = pkgs.kdePackages.plasma5-themes.sweet;
+    };
+
+    lockScreen = {
+      theme = {
+        name = "Sweet";
+        package = pkgs.kdePackages.plasma5-themes.sweet;
+      };
+    };
+
+    # Sweet looks great with a bit of translucency; enable the blur effect.
+    kwin.effects = {
+      blur = true;
+      roundedCorners = false;   # keep the classic square corners for a light look
+    };
+
+    panels = [
+      {
+        location = "bottom";
+        height = 36;
+        widgets = [
+          "org.kde.plasma.kickoff"
+          "org.kde.plasma.digitalclock"
+          "org.kde.plasma.systemtray"
+          "org.kde.plasma.appmenu"
+        ];
+      }
+    ];
+  };
+}
