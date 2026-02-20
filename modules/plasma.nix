@@ -1,9 +1,15 @@
 # modules/plasma.nix
-{ config, pkgs, themeName, ... }:
+{ pkgs, themeName, ... }:
 
 {
   imports = [
-    # Pull in the concrete theme module based on the selector
-    (import ./themes/${themeName}.nix { inherit pkgs; })
+    # This dynamically loads ./themes/sweet.nix or ./themes/nordic.nix
+    ./themes/${themeName}.nix
   ];
+
+  # You can put common Plasma settings here that apply to ALL themes
+  programs.plasma = {
+    enable = true;
+    overrideConfig = true; # Ensures Nix config wins over manual GUI changes
+  };
 }
