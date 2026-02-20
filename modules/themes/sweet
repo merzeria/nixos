@@ -1,64 +1,38 @@
-# modules/themes/sweet.nix
 { pkgs, ... }:
 
 {
-  plasma-manager = {
-    user = "simon";
-
-    theme = {
-      name = "Sweet";
-      package = pkgs.kdePackages.plasma5-themes.sweet;
-
-      colorScheme = {
-        name = "Sweet";
-        # Sweet provides its own colour scheme; you can override with a custom file if desired.
-      };
-
-      icons = {
-        name = "Papirus-Light";               # Sweet is a light theme, Papirus‑Light fits nicely
-        package = pkgs.kdePackages.papirus-icon-theme;
-      };
-
-      cursor = {
-        name = "Breeze";
-        package = pkgs.kdePackages.breeze-cursor-theme;
-      };
+  programs.plasma = {
+    enable = true;
+    workspace = {
+      lookAndFeel = "com.github.vinceliuice.Sweet";
+      cursor.theme = "Sweet-cursors"; # This refers to the name inside the package
+      iconTheme = "Papirus-Dark";
+      colorScheme = "Sweet";
     };
 
-    kwin.decoration = {
-      name = "Sweet";
-      package = pkgs.kdePackages.plasma5-themes.sweet;
-    };
-
-    splash = {
-      name = "Sweet";
-      package = pkgs.kdePackages.plasma5-themes.sweet;
-    };
-
-    lockScreen = {
-      theme = {
-        name = "Sweet";
-        package = pkgs.kdePackages.plasma5-themes.sweet;
-      };
-    };
-
-    # Sweet looks great with a bit of translucency; enable the blur effect.
-    kwin.effects = {
-      blur = true;
-      roundedCorners = false;   # keep the classic square corners for a light look
+    # Direct config for window decorations (KDE 6 style)
+    configFile."kwinrc"."org.kde.kdecoration2" = {
+      library = "org.kde.kwin.aurorae";
+      theme = "__aurorae__svg__Sweet";
     };
 
     panels = [
       {
         location = "bottom";
-        height = 36;
+        height = 44;
         widgets = [
           "org.kde.plasma.kickoff"
-          "org.kde.plasma.digitalclock"
+          "org.kde.plasma.icontasks"
+          "org.kde.plasma.marginsseparator"
           "org.kde.plasma.systemtray"
-          "org.kde.plasma.appmenu"
+          "org.kde.plasma.digitalclock"
         ];
       }
     ];
   };
+
+  home.packages = with pkgs; [
+    sweet              # Provides the Global Theme and Cursors
+    papirus-icon-theme # Provides the Icons
+  ];
 }
