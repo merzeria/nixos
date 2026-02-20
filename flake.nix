@@ -19,46 +19,42 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs { inherit system; };
-        username = "simon";          # <-- your Linux user name
-        hostName = "nixos";          # <-- keep the same as in your old config
+        username = "simon";          # your Linux user name
       in {
-        nixosConfigurations.${hostName} = nixpkgs.lib.nixosSystem {
+        # ---------------------------------------------------------
+        # Two complete host configurations – just change the suffix
+        # ---------------------------------------------------------
+
+        nixosConfigurations.nixos-nordic = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
-            # 1 Hardware detection (generated file)
+            # 1️⃣ Hardware detection (generated file)
             ./hardware-configuration.nix
 
-            # 2 Your system‑wide options
+            # 2️⃣ System‑wide options (your old configuration.nix content)
             ./modules/system.nix
 
-            # 3 Plasma‑manager module
+            # 3️⃣ Plasma‑manager core module
             plasma-manager.nixosModules.plasma-manager
 
-            # 4 Themes
-            nixosConfigurations = {
-        # Two *named* configurations – just change the suffix to pick a theme
-        myhost-nordic = nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [
-            ./hardware-configuration.nix
-            ./modules/system.nix
+            # 4️⃣ Theme selector – Nordic
             (import ./modules/plasma.nix { inherit pkgs; themeName = "nordic"; })
-            ./modules/home.nix
+
+            # 5️⃣ Home‑Manager integration
+            ({ config, pkgs, ... }: {
+              home-manager.useUserPackages = true;
+              home-manager.users.${username} = import ./modules/home.nix;
+            })
           ];
         };
 
-        myhost-sweet = nixpkgs.lib.nixosSystem {
+        nixosConfigurations.nixos-sweet = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
             ./hardware-configuration.nix
             ./modules/system.nix
+            plasma-manager.nixosModules.plasma-manager
             (import ./modules/plasma.nix { inherit pkgs; themeName = "sweet"; })
-            ./modules/home.nix
-          ];
-        };
-      };
-      
-            # 5 Home‑Manager integration
             ({ config, pkgs, ... }: {
               home-manager.useUserPackages = true;
               home-manager.users.${username} = import ./modules/home.nix;
