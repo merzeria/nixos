@@ -1,15 +1,9 @@
-{ config, pkgs, ... }:
+# modules/plasma.nix
+{ config, pkgs, themeName, ... }:
 
 {
-  # Example: set Breeze Dark as the global theme
-  programs.plasma.theme = "BreezeDark";
-
-  # Enable the default set of KDE applications
-  environment.systemPackages = with pkgs; [
-    plasma-browser-integration
-    dolphin
-    konsole
-    kate
-    libsForQt5.qtstyleplugin-kvantum
+  imports = [
+    # Pull in the concrete theme module based on the selector
+    (import ./themes/${themeName}.nix { inherit pkgs; })
   ];
 }
