@@ -40,7 +40,7 @@
   };
 };
 
-  # Auto‑upgrade (kept exactly as you had it)
+  # Auto‑upgrade
   system.autoUpgrade.enable = true;
   system.autoUpgrade.allowReboot = false;
 
@@ -110,12 +110,9 @@
     extraGroups = [ "networkmanager" "wheel" ];
     # Packages that belong to the *system* profile (not per‑user)
     packages = with pkgs; [
-      vesktop
       floorp-bin
       pwvucontrol
       gamescope-wsi
-      duckstation
-      pcsx2
     ];
   };
 
@@ -135,6 +132,7 @@
     vim
     wget
     usbutils
+    git
   ];
 
   # --------------------------------------------------------------
