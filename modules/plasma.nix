@@ -10,5 +10,6 @@
     dolphin
     konsole
     kate
+    libsForQt5.qtstyleplugin-kvantum
   ];
 }
