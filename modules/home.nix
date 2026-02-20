@@ -7,17 +7,10 @@
 
   # Packages that should appear in the user’s `$HOME/.local/...` profile
   home.packages = with pkgs; [
-    # Keep the same list you had under users.users.simon.packages
     vesktop
-    floorp-bin
-    pwvucontrol
-    gamescope-wsi
     duckstation
     pcsx2
-
-    # Anything else you want just for the user (feel free to add)
     neovim
-    git
     htop
   ];
 
