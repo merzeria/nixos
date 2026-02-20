@@ -16,18 +16,29 @@
   networking.networkmanager.enable = true;
   time.timeZone = "Europe/Copenhagen";
 
-  i18n.defaultLocale = "en_GB.UTF-8";
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS       = "da_DK.UTF-8";
+  i18n = {
+  # Base language
+  defaultLocale = "en_GB.UTF-8";
+
+  # Make sure the locales we need are actually built
+  supportedLocales = [
+    "en_GB.UTF-8/UTF-8"
+    "da_DK.UTF-8/UTF-8"
+  ];
+
+  # Override the categories that should follow Danish conventions
+  extraLocaleSettings = {
+    LC_ADDRESS        = "da_DK.UTF-8";
     LC_IDENTIFICATION = "da_DK.UTF-8";
-    LC_MEASUREMENT  = "da_DK.UTF-8";
-    LC_MONETARY     = "da_DK.UTF-8";
-    LC_NAME         = "da_DK.UTF-8";
-    LC_NUMERIC      = "da_DK.UTF-8";
-    LC_PAPER        = "da_DK.UTF-8";
-    LC_TELEPHONE    = "da_DK.UTF-8";
-    LC_TIME         = "da_DK.UTF-8";
+    LC_MEASUREMENT    = "da_DK.UTF-8";
+    LC_MONETARY       = "da_DK.UTF-8";
+    LC_NAME           = "da_DK.UTF-8";
+    LC_NUMERIC        = "da_DK.UTF-8";
+    LC_PAPER          = "da_DK.UTF-8";
+    LC_TELEPHONE      = "da_DK.UTF-8";
+    LC_TIME           = "da_DK.UTF-8";
   };
+};
 
   # Auto‑upgrade (kept exactly as you had it)
   system.autoUpgrade.enable = true;
