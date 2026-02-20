@@ -1,75 +1,41 @@
-# modules/themes/nordic.nix
 { pkgs, ... }:
 
 {
-  plasma-manager = {
-    user = "simon";
-
-    # -------------------- Desktop theme --------------------
-    theme = {
-      name = "Nordic";
-      # The Nordik theme lives in the `kdePackages` collection
-      package = pkgs.kdePackages.plasma5-themes.nordic;
-
-      # -------------------- Colour scheme --------------------
-      # Nordik ships its own colour scheme named "Nordic"
-      colorScheme = {
-        name = "Nordic";
-        # If you ever want a custom .colors file you can add:
-        # path = /path/to/custom.colors;
-      };
-
-      # -------------------- Icon theme --------------------
-      icons = {
-        name = "Papirus-Dark";               # matches the dark aesthetic
-        package = pkgs.kdePackages.papirus-icon-theme;
-      };
-
-      # -------------------- Cursor theme --------------------
-      cursor = {
-        name = "Breeze Snow";
-        package = pkgs.kdePackages.breeze-cursor-theme;
-      };
+  programs.plasma = {
+    enable = true;
+    workspace = {
+      lookAndFeel = "com.github.vinceliuice.Nordic";
+      cursor.theme = "Nordic-cursors";
+      iconTheme = "Papirus-Dark";
+      colorScheme = "Nordic";
     };
 
-    # -------------------- Window decorations --------------------
-    kwin.decoration = {
-      name = "Nordic";
-      package = pkgs.kdePackages.plasma5-themes.nordic;
+    # Direct config for Nordic window decorations (Aurorae)
+    configFile."kwinrc"."org.kde.kdecoration2" = {
+      library = "org.kde.kwin.aurorae";
+      theme = "__aurorae__svg__Nordic";
     };
 
-    # -------------------- Splash screen --------------------
-    splash = {
-      name = "Nordic";
-      package = pkgs.kdePackages.plasma5-themes.nordic;
-    };
+    # Enable blur (optional, looks great with Nordic)
+    configFile."kwinrc"."Plugins".blurEnabled = true;
 
-    # -------------------- Lock screen --------------------
-    lockScreen = {
-      theme = {
-        name = "Nordic";
-        package = pkgs.kdePackages.plasma5-themes.nordic;
-      };
-    };
-
-    # -------------------- Visual effects (optional) --------------------
-    kwin.effects = {
-      blur = true;
-      roundedCorners = true;
-    };
-
-    # -------------------- Panel (taskbar) example --------------------
     panels = [
       {
         location = "bottom";
-        height = 38;
+        height = 44;
         widgets = [
           "org.kde.plasma.kickoff"
-          "org.kde.plasma.digitalclock"
+          "org.kde.plasma.icontasks"
+          "org.kde.plasma.marginsseparator"
           "org.kde.plasma.systemtray"
-          "org.kde.plasma.appmenu"
+          "org.kde.plasma.digitalclock"
         ];
       }
     ];
   };
+
+  home.packages = with pkgs; [
+    nordic             # Provides the Global Theme, Cursors, and Colors
+    papirus-icon-theme # Standard companion for Nordic
+  ];
 }
