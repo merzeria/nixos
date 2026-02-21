@@ -1,5 +1,5 @@
 # modules/home.nix
-{ inputs, pkgs, themeName, ... }:
+{ inputs, pkgs, themeName, lib, ... }:
 
 {
   imports = [
@@ -105,6 +105,13 @@
       [Desktop Entry]
       Name=Vesktop
       Exec=${pkgs.vesktop}/bin/vesktop
+      Type=Application
+      Terminal=false
+    '';
+    "autostart/kill-corners.desktop".text = ''
+      [Desktop Entry]
+      Name=Kill Corners Forever
+      Exec=sh -c "sleep 10 && kwriteconfig6 --file kwinrc --group Effect-kwin4_effect_overview --key BorderActivate 9 && qdbus6 org.kde.KWin /KWin reconfigure"
       Type=Application
       Terminal=false
     '';
