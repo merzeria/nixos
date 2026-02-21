@@ -92,4 +92,21 @@
     };
   };
 };
+    # Declarative Autostart using standard XDG desktop files
+  xdg.configFile = {
+    "autostart/steam.desktop".text = ''
+      [Desktop Entry]
+      Name=Steam
+      Exec=${pkgs.steam}/bin/steam -silent
+      Type=Application
+      Terminal=false
+    '';
+    "autostart/vesktop.desktop".text = ''
+      [Desktop Entry]
+      Name=Vesktop
+      Exec=${pkgs.vesktop}/bin/vesktop
+      Type=Application
+      Terminal=false
+    '';
+  };
 }
