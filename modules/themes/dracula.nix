@@ -12,7 +12,6 @@
       windowDecorations.library = "org.kde.kwin.aurorae";
       windowDecorations.theme = "__aurorae__svg__Dracula";
       splashScreen.theme = "Dracula";
-
     };
 
     # Dracula supports Kvantum but can also use the standard style

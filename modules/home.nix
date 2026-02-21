@@ -84,14 +84,10 @@
       name = "Simon Halberg";
       email = "stwhal@protonmail.com";
     };
-    init = {
-      defaultBranch = "main";
-    };
-    safe = {
-      directory = [ "/home/simon/simonos" "/etc/nixos" ];
+    init.defaultBranch = "main";
+    safe.directory = [ "/home/simon/simonos" "/etc/nixos" ];
     };
   };
-};
     # Declarative Autostart using standard XDG desktop files
   xdg.configFile = {
     "autostart/steam.desktop".text = ''
@@ -105,13 +101,6 @@
       [Desktop Entry]
       Name=Vesktop
       Exec=${pkgs.vesktop}/bin/vesktop
-      Type=Application
-      Terminal=false
-    '';
-    "autostart/kill-corners.desktop".text = ''
-      [Desktop Entry]
-      Name=Kill Corners Forever
-      Exec=sh -c "sleep 10 && kwriteconfig6 --file kwinrc --group Effect-kwin4_effect_overview --key BorderActivate 9 && qdbus6 org.kde.KWin /KWin reconfigure"
       Type=Application
       Terminal=false
     '';
