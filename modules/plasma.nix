@@ -20,7 +20,7 @@
           window-class = { value = "vesktop"; type = "exact"; };
         };
         apply = {
-          screen = 1; # Usually the second monitor
+          screen = 0; # Usually the second monitor
         };
       }
       {
@@ -29,7 +29,7 @@
           window-class = { value = "steam"; type = "exact"; };
         };
         apply = {
-          screen = 1;
+          screen = 0;
         };
       }
     ];
