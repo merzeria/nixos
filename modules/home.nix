@@ -78,14 +78,18 @@
     '';
   };
   programs.git = {
-    enable = true;
-    userName = "Simon Halberg";  # Change to your name
-    userEmail = "stwhal@protonmail.com"; # Change to your GitLab email
-
-    extraConfig = {
-      init.defaultBranch = "main";
-      # This helps if you are working in directories like /etc/nixos
-      safe.directory = [ "/home/simon/simonos" "/etc/nixos" ];
+  enable = true;
+  settings = {
+    user = {
+      name = "Simon Halberg";
+      email = "stwhal@protonmail.com";
+    };
+    init = {
+      defaultBranch = "main";
+    };
+    safe = {
+      directory = [ "/home/simon/simonos" "/etc/nixos" ];
     };
   };
+};
 }
