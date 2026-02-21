@@ -1,0 +1,13 @@
+# Nix/NixOS specific
+result
+result-*
+.direnv/
+.nix-helper/
+
+# Temporary/Swap files
+*.swp
+*~
+.DS_Store
+
+# Credentials (if you ever use them)
+.env
