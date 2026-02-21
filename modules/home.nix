@@ -77,4 +77,15 @@
       PROMPT='%F{cyan}%n@%m %F{yellow}%~ %F{reset}$ '
     '';
   };
+  programs.git = {
+    enable = true;
+    userName = "Simon Halberg";  # Change to your name
+    userEmail = "stwhal@protonmail.com"; # Change to your GitLab email
+
+    extraConfig = {
+      init.defaultBranch = "main";
+      # This helps if you are working in directories like /etc/nixos
+      safe.directory = [ "/home/simon/simonos" "/etc/nixos" ];
+    };
+  };
 }
