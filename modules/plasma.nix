@@ -44,13 +44,13 @@
         description = "Force Discord clients to second monitor";
         match = {
           window-class = {
-            value = "legcord|electron";
+            value = "abaddon";
             type = "regex";
           };
         };
         apply = {
           screen = 1; # Try 0 if 1 moves it to the wrong one
-          screenrule = 3; # Force screen
+          screenrule = 2; # Force screen
         };
       }
       {
