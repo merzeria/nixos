@@ -11,7 +11,7 @@
   programs.plasma = {
     enable = true;
     overrideConfig = true; # Ensures Nix config wins over manual GUI changes
-
+    configFile.ksmserverrc.General.loginMode = "emptySession";
       configFile.kwinrc = {
       # The "Smoking Gun" fix from your diff
       "Effect-overview".BorderActivate = { value = 9; immutable = true; };

@@ -13,7 +13,7 @@ in
   programs.plasma = {
     enable = true;
     workspace = {
-      lookAndFeel = "com.github.vinceliuice.Sweet";
+      #lookAndFeel = "com.github.vinceliuice.Sweet";
       cursor.theme = "Sweet-cursors";
       iconTheme = "candy-icons";
       colorScheme = "Sweet";

@@ -1,5 +1,5 @@
 # modules/system.nix
-{ config, pkgs, ... }:
+{ config, pkgs, themeName, ... }:
 
 {
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -69,15 +69,23 @@
   # Display manager & Plasma
   # --------------------------------------------------------------
   services.xserver.enable = true;
-  services.displayManager.sddm = {
-    enable = true;
-    wayland.enable = true;
-    theme = "breeze";
-    settings.Theme = {
-    CursorTheme = "Dracula-cursors";
+  services.displayManager = {
+    sddm = {
+      enable = true;
+      wayland.enable = true;
+      theme = "catppuccin-sddm-corners";
+    };
+    autoLogin = {
+      enable = true;
+      user = "simon";
+    };
   };
-  };
-
+# This creates the theme configuration for SDDM
+  environment.etc."sddm-catppuccin-config.conf".text = ''
+    [General]
+    Flavor="mocha"
+    Accent="mauve"
+  '';
   services.desktopManager.plasma6.enable = true;
 
   # X11 keymap
@@ -132,10 +140,6 @@
   };
   users.users.simon.shell = pkgs.zsh;
 
-  # Automatic login (still handled by the system)
-  services.displayManager.autoLogin.enable = true;
-  services.displayManager.autoLogin.user = "simon";
-
   # --------------------------------------------------------------
   # Unfree packages & Flatpaks
   # --------------------------------------------------------------
@@ -152,6 +156,19 @@
     git
     kdePackages.qtstyleplugin-kvantum # Kvantum for KDE
     libsForQt5.qtstyleplugin-kvantum
+    catppuccin-sddm-corners
+   # 1. The KDE Theme (Mocha Mauve)
+    (catppuccin-kde.override {
+      flavour = [ "mocha" ];
+      accents = [ "mauve" ];
+      winDecStyles = [ "classic" ]; # Try classic for smaller buttons
+    })
+
+    # 2. The Folder Icons (Mocha Mauve)
+    (catppuccin-papirus-folders.override {
+      flavor = "mocha";
+      accent = "mauve";
+    })
   ];
 
   # --------------------------------------------------------------

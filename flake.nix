@@ -21,7 +21,7 @@
 
       mkHost = themeName: nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = { inherit inputs; };
+        specialArgs = { inherit inputs themeName; };
         modules = [
           ./hardware-configuration.nix
           ./modules/system.nix
@@ -39,6 +39,7 @@
         sweet  = mkHost "sweet";
         nordic = mkHost "nordic";
         dracula = mkHost "dracula";
+        catppuccin = mkHost "catppuccin";
       };
     };
 }

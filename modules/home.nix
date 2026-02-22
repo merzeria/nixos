@@ -64,11 +64,13 @@
       sweet = "sudo nixos-rebuild test --flake ~/simonos/#sweet";
       nordic = "sudo nixos-rebuild test --flake ~/simonos/#nordic";
       dracula = "sudo nixos-rebuild test --flake ~/simonos/#dracula";
+      catppuccin = "sudo nixos-rebuild test --flake ~/simonos/#catppuccin";
 
       # Use 'set-sweet' or 'set-nordic' to make it permanent
       set-sweet = "sudo nixos-rebuild switch --flake ~/simonos/#sweet";
       set-nordic = "sudo nixos-rebuild switch --flake ~/simonos/#nordic";
       set-dracula = "sudo nixos-rebuild switch --flake ~/simonos/#dracula";
+      set-catppuccin = "sudo nixos-rebuild switch --flake ~/simonos/#catppuccin";
 
       # Git backup
       push-nix = "cd ~/simonos && git add . && git commit -m \"Update: $(date +%Y-%m-%d)\" && git push";
