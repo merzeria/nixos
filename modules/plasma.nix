@@ -39,8 +39,8 @@
       {
         description = "Move Vesktop to correct monitor";
         match = {
-          window-class = { value = "vesktop"; type = "exact"; };
-        };
+          window-class = "vesktop";
+          };
         apply = {
           screen = 1;      # Try swapping this to 0 if 1 is wrong
           screenrule = 2;   # This forces the rule every time
@@ -49,7 +49,7 @@
       {
         description = "Move Steam to correct monitor";
         match = {
-          window-class = { value = "steam"; type = "exact"; };
+          window-class = "steam";
         };
         apply = {
           screen = 1;      # Try swapping this to 0 if 1 is wrong

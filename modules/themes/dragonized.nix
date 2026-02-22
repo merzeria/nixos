@@ -7,6 +7,7 @@
       cursor.theme = "Sweet-cursors";
       iconTheme = "candy-icons";
       colorScheme = "Sweet";
+      wallpaper = ./wallpapers/sweetnix.png;
       windowDecorations.library = "org.kde.kwin.aurorae";
       windowDecorations.theme = "__aurorae__svg__Sweet-Dark-transparent";
     };
@@ -17,35 +18,59 @@
     };
 
     panels = [
-      # --- THE TOP BAR (Global Menu & System Tray) ---
+      # --- MONITOR 1 (Main) ---
       {
         location = "top";
         height = 26;
+        screen = 0;
         widgets = [
-          "org.kde.plasma.kickoff"          # App Launcher
-          "org.kde.plasma.appmenu"          # THE GLOBAL MENU (File, Edit, etc.)
-          "org.kde.plasma.panelspacer"      # Pushes rest to the right
+          "org.kde.plasma.kickoff"
+          "org.kde.plasma.appmenu" # Global Menu
+          "org.kde.plasma.panelspacer"
           "org.kde.plasma.systemtray"
           "org.kde.plasma.digitalclock"
         ];
       }
-
-      # --- THE BOTTOM DOCK (Icons-only Task Manager) ---
       {
         location = "bottom";
         height = 48;
-        alignment = "center";               # Centers the dock
-        lengthMode = "fit";                 # Makes it look like a dock, not a bar
-        floating = true;                    # Plasma 6 floating effect
+        screen = 0;
+        alignment = "center";
+        lengthMode = "fit";
+        floating = true;
+        hiding = "dodgewindows"; # This makes the dock hide when a window covers it
+        widgets = [ "org.kde.plasma.icontasks" ];
+      }
+
+      # --- MONITOR 2 (Secondary) ---
+      {
+        location = "top";
+        height = 26;
+        screen = 1;
         widgets = [
-          "org.kde.plasma.icontasks"        # Pinned and running apps
+          "org.kde.plasma.kickoff"
+          "org.kde.plasma.appmenu"
+          "org.kde.plasma.panelspacer"
+          "org.kde.plasma.systemtray"
+          "org.kde.plasma.digitalclock"
         ];
+      }
+      {
+        location = "bottom";
+        height = 48;
+        screen = 1;
+        alignment = "center";
+        lengthMode = "fit";
+        floating = true;
+        hiding = "dodgewindows";
+        widgets = [ "org.kde.plasma.icontasks" ];
       }
     ];
   };
 
   home.packages = with pkgs; [
     sweet-nova
+    sweet
     candy-icons
   ];
 }
