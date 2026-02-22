@@ -103,10 +103,13 @@
     '';
     "autostart/legcord.desktop".text = ''
       [Desktop Entry]
-      Name=Legcord
-      Exec=${pkgs.legcord}/bin/legcord
       Type=Application
-      Terminal=false
-    '';
+      Exec=sh -c "sleep 5 && legcord"
+      Hidden=false
+      NoDisplay=false
+      X-GNOME-Autostart-enabled=true
+      Name=Legcord (Delayed)
+      Comment=Starts Legcord after KDE is settled to prevent crashes
+  '';
   };
 }
