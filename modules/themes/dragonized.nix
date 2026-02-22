@@ -26,8 +26,8 @@
         screen = 0;
         widgets = [
           "org.kde.plasma.kickoff"
+          "org.kde.plasma.windowtitle" # This is built-in to Plasma 6!
           "org.kde.plasma.appmenu" # Global Menu
-         # "org.kde.plasma.windowtitle" # This is built-in to Plasma 6!
           "org.kde.plasma.panelspacer"
           "org.kde.plasma.systemtray"
           "org.kde.plasma.digitalclock"
