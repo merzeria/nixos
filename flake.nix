@@ -40,6 +40,7 @@
         nordic = mkHost "nordic";
         dracula = mkHost "dracula";
         catppuccin = mkHost "catppuccin";
+        dragonized = mkHost "dragonized";
       };
     };
 }
