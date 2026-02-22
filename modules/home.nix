@@ -27,7 +27,7 @@
 
   #installed packages
   home.packages = with pkgs; [
-    goofcord
+    legcord
     pcsx2
     neovim
     htop
@@ -101,10 +101,10 @@
       Type=Application
       Terminal=false
     '';
-    "autostart/vesktop.desktop".text = ''
+    "autostart/legcord.desktop".text = ''
       [Desktop Entry]
-      Name=Vesktop
-      Exec=${pkgs.vesktop}/bin/vesktop
+      Name=Legcord
+      Exec=${pkgs.legcord}/bin/legcord
       Type=Application
       Terminal=false
     '';

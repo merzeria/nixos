@@ -11,6 +11,10 @@
   programs.plasma = {
     enable = true;
     overrideConfig = true; # Ensures Nix config wins over manual GUI changes
+    configFile = {
+      # --- DISABLE KDE WALLET ---
+      "kwalletrc"."Wallet"."Enabled" = false;
+    };
     configFile.ksmserverrc.General.loginMode = "emptySession";
       configFile.kwinrc = {
       # The "Smoking Gun" fix from your diff
@@ -37,13 +41,17 @@
     # Add this section for Monitor Rules
     window-rules = [
       {
-        description = "Move goofcord to correct monitor";
+        description = "Force Discord clients to second monitor";
         match = {
-          window-class = "goofcord";
+          window-class = {
+            value = "legcord|electron";
+            type = "regex";
           };
+        };
         apply = {
-          screen = 1;      # Try swapping this to 0 if 1 is wrong
-          screenrule = 2;   # This forces the rule every time
+          screen = 1; # Try 0 if 1 moves it to the wrong one
+          screenrule = 2;
+          force = true; # 'force' is stronger than 'apply'
         };
       }
       {
@@ -61,5 +69,6 @@
     configFile.kscreenlockerrc.Daemon.Autolock = false;
     configFile.kscreenlockerrc.Daemon.LockOnResume = false;
     configFile.kscreenlockerrc.Daemon.Timeout = 0;
+
   };
 }

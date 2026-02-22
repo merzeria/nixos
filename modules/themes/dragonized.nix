@@ -10,6 +10,7 @@
       wallpaper = ./wallpapers/sweetnix.png;
       windowDecorations.library = "org.kde.kwin.aurorae";
       windowDecorations.theme = "__aurorae__svg__Sweet-Dark-transparent";
+      splashScreen.theme = "Sweet";
     };
 
     configFile = {
