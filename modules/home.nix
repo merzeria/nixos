@@ -27,7 +27,7 @@
 
   #installed packages
   home.packages = with pkgs; [
-    vesktop
+    goofcord
     pcsx2
     neovim
     htop

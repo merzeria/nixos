@@ -37,9 +37,9 @@
     # Add this section for Monitor Rules
     window-rules = [
       {
-        description = "Move Vesktop to correct monitor";
+        description = "Move goofcord to correct monitor";
         match = {
-          window-class = "vesktop";
+          window-class = "goofcord";
           };
         apply = {
           screen = 1;      # Try swapping this to 0 if 1 is wrong
