@@ -54,5 +54,9 @@
         };
       }
     ];
+    # Power Management and Screen Locking settings
+    configFile.kscreenlockerrc.Daemon.Autolock = false;
+    configFile.kscreenlockerrc.Daemon.LockOnResume = false;
+    configFile.kscreenlockerrc.Daemon.Timeout = 0;
   };
 }

@@ -6,10 +6,35 @@
   # --------------------------------------------------------------
   # Bootloader & kernel
   # --------------------------------------------------------------
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelPackages = pkgs.linuxPackages_zen;
+  boot = {
+    # 1. Hides the text messages during boot
+    kernelParams = [ "quiet" "splash" "vga=current" "rd.systemd.show_status=false" "rd.udev.log_level=3" "udev.log_priority=3" ];
 
+    # 2. Ensures the text doesn't just "flicker" at the start
+    consoleLogLevel = 0;
+
+    # 3. Enables the "Plymouth" boot splash screen
+    plymouth = {
+      enable = true;
+      theme = "catppuccin-mocha";
+      themePackages = [
+        (pkgs.catppuccin-plymouth.override { variant = "mocha"; })
+      ];
+    };
+    # 4. hopefully fixes the rollbacks
+    loader = {
+      systemd-boot = {
+        enable = true;
+        configurationLimit = 10; # Keeps only the last 10 versions to save space
+      };
+      # 5. Forces the menu to show for 5 seconds so you can see your options
+      timeout = 5;
+      efi.canTouchEfiVariables = true;
+      };
+    # 7. Kernel.
+    kernelPackages = pkgs.linuxPackages_zen;
+  };
+    console.keyMap = "dk-latin1";
   # --------------------------------------------------------------
   # Basic system settings
   # --------------------------------------------------------------
@@ -48,6 +73,22 @@
   dates = "weekly";
   options = "--delete-older-than 7d";
 };
+
+# This disables sleep/suspend at the system level
+  systemd.targets.sleep.enable = false;
+  systemd.targets.suspend.enable = false;
+  systemd.targets.hibernate.enable = false;
+  systemd.targets.hybrid-sleep.enable = false;
+
+  # This tells the login manager not to turn off the screen
+  services.logind.settings = {
+    Login = {
+      IdleAction = "ignore";
+      HandleLidSwitch = "ignore";
+      HandleLidSwitchExternalPower = "ignore";
+      HandleLidSwitchDocked = "ignore";
+    };
+  };
 
   # --------------------------------------------------------------
   # Graphics / NVIDIA
@@ -93,7 +134,6 @@
     layout = "dk";
     variant = "";
   };
-  console.keyMap = "dk-latin1";
 
   # --------------------------------------------------------------
   # Audio / PipeWire
@@ -169,6 +209,7 @@
       flavor = "mocha";
       accent = "mauve";
     })
+    catppuccin-plymouth
   ];
 
   # --------------------------------------------------------------
@@ -176,7 +217,10 @@
   # --------------------------------------------------------------
   programs.steam = {
     enable = true;
-    extraCompatPackages = with pkgs; [ proton-ge-bin ];
+    # Using pkgs.proton-ge-bin directly ensures the path is correctly passed
+    extraCompatPackages = [
+      pkgs.proton-ge-bin
+    ];
   };
   programs.gamemode.enable = true;
 
