@@ -27,7 +27,7 @@
 
   #installed packages
   home.packages = with pkgs; [
-    abaddon
+    legcord
     pcsx2
     neovim
     htop
@@ -101,15 +101,15 @@
       Type=Application
       Terminal=false
     '';
-    "autostart/abaddon.desktop".text = ''
+    "autostart/legcord.desktop".text = ''
       [Desktop Entry]
       Type=Application
-      Exec=sh -c "sleep 5 && abaddon"
+      Exec=sh -c "sleep 5 && legcord"
       Hidden=false
       NoDisplay=false
       X-GNOME-Autostart-enabled=true
-      Name=abaddon (Delayed)
-      Comment=Starts abaddon after KDE is settled to prevent crashes
+      Name=legcord (Delayed)
+      Comment=Starts legcord after KDE is settled to prevent crashes
   '';
   };
 }

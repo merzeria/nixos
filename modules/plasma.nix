@@ -44,7 +44,7 @@
         description = "Force Discord clients to second monitor";
         match = {
           window-class = {
-            value = "abaddon";
+            value = "legcord";
             type = "regex";
           };
         };
