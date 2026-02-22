@@ -104,7 +104,7 @@
     "autostart/legcord.desktop".text = ''
       [Desktop Entry]
       Type=Application
-      Exec=sh -c "sleep 5 && legcord"
+      Exec=sh -c "sleep 20 && legcord"
       Hidden=false
       NoDisplay=false
       X-GNOME-Autostart-enabled=true

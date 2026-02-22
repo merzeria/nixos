@@ -50,12 +50,7 @@
         };
         apply = {
           screen = 1; # Try 0 if 1 moves it to the wrong one
-          screenrule = 2; # Force screen
-          #position = "3850,450"; # Physical coordinates of your DP-2 monitor
-          positionrule = 2; # Force position
-          maximizeHorizontally = true;
-          maximizeVertically = true;
-          force = true; # 'force' is stronger than 'apply'
+          screenrule = 3; # Force screen
         };
       }
       {
