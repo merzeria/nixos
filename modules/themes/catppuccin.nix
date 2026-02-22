@@ -15,9 +15,11 @@
       splashScreen.theme = "Catppuccin-Mocha-Mauve";
     };
 
-    # Dracula supports Kvantum but can also use the standard style
-    configFile."kdeglobals"."General"."widgetStyle" = "kvantum";
-
+    # catppuccin supports Kvantum but can also use the standard style
+    configFile = {
+    "kdeglobals"."General"."widgetStyle" = "kvantum";
+    "kvantumrc"."General"."theme" = "catppuccin-mocha-mauve";
+  };
     panels = [
       {
         location = "bottom";
@@ -51,6 +53,5 @@
     catppuccin-cursors# Provides the Cursors
     catppuccin-cursors.mochaMauve
     nixos-artwork.wallpapers.catppuccin-mocha
-    catppuccin-kvantum
   ];
 }

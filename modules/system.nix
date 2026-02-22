@@ -8,7 +8,15 @@
   # --------------------------------------------------------------
   boot = {
     # 1. Hides the text messages during boot
-    kernelParams = [ "quiet" "splash" "vga=current" "rd.systemd.show_status=false" "rd.udev.log_level=3" "udev.log_priority=3" ];
+    kernelParams = [
+      "quiet"
+      "splash"
+      "vga=current"
+      "rd.systemd.show_status=false"
+      "rd.udev.log_level=3"
+      "udev.log_priority=3"
+      "nvidia-drm.modeset=1"
+    ];
 
     # 2. Ensures the text doesn't just "flicker" at the start
     consoleLogLevel = 0;
@@ -170,6 +178,12 @@
     description = "Simon Halberg";
     extraGroups = [ "networkmanager" "wheel" "video" "audio" ];
   };
+  # Kvantum
+  qt = {
+  enable = true;
+  platformTheme = "kde";
+  style = "kvantum";
+};
 
   # Make Zsh the default shell for the user system-wide
   programs.zsh = {
@@ -210,6 +224,11 @@
       accent = "mauve";
     })
     catppuccin-plymouth
+    # 3. FIX: Add the Kvantum Theme override here
+  (catppuccin-kvantum.override {
+    variant = "mocha";
+    accent = "mauve";
+  })
   ];
 
   # --------------------------------------------------------------

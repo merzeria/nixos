@@ -25,7 +25,10 @@ in
     };
 
     # Force Kvantum for the "Glassy" look
-    configFile."kdeglobals"."General"."widgetStyle" = "kvantum";
+    configFile = {
+    "kdeglobals"."General"."widgetStyle" = "kvantum";
+    "kvantumrc"."General"."theme" = "Sweet-transparent-toolbar";
+    };
 
     panels = [
       {

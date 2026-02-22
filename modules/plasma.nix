@@ -27,6 +27,9 @@
       "TouchEdges".TopLeft = { value = 0; immutable = true; };
       "TouchEdges".Top = { value = 0; immutable = true; };
       "ElectricBorders".TopLeft = { value = 0; immutable = true; };
+      # Disable the resistance/stickiness between monitors
+      "EdgeBarrier"."EdgeBarrier" = { value = 0; immutable = true; };
+      "EdgeBarrier"."CornerBarrier" = { value = false; immutable = true; };
 
       # Master Kill Switch
       "ScreenEdges".Enabled = { value = false; immutable = true; };
