@@ -29,4 +29,14 @@
   home.sessionVariables = {
     STEAM_EXTRA_COMPAT_TOOLS_PATHS = "${pkgs.proton-ge-bin}/bin";
   };
+  programs.mangohud = {
+    enable = true;
+    settings = {
+      full = true;
+      no_display = true;
+      cpu_temp = true;
+      gpu_temp = true;
+      fps_limit = 120;
+    };
+  };
 }

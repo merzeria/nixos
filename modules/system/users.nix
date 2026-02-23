@@ -21,7 +21,14 @@
   ];
 
   environment.systemPackages = with pkgs; [
-    vim wget git usbutils alsa-utils fastfetch
+    vim
+    wget
+    git
+    usbutils
+    alsa-utils
+    fastfetch
+    gamescope-wsi
+    goverlay
     kdePackages.qtstyleplugin-kvantum
     libsForQt5.qtstyleplugin-kvantum
     catppuccin-sddm-corners
