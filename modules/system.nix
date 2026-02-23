@@ -248,6 +248,9 @@
     proton-ge-bin
     ];
   };
+  environment.sessionVariables = {
+  STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/run/current-system/sw/bin/proton-ge-bin";
+};
   programs.gamemode.enable = true;
 
   # --------------------------------------------------------------
