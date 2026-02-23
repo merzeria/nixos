@@ -36,8 +36,6 @@
     lutris
     goverlay
     mangohud
-    discordo
-    pkgs.moonlight
     equibop
   ];
 

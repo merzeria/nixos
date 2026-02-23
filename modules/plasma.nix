@@ -15,7 +15,7 @@
       # --- DISABLE KDE WALLET ---
       "kwalletrc"."Wallet"."Enabled" = false;
       # Stop plasma crash
-      "kwinrc"."Windows"."WindowMenuTimeout" = 5000;
+      # "kwinrc"."Windows"."WindowMenuTimeout" = 5000;
     };
     configFile.ksmserverrc.General.loginMode = "emptySession";
       configFile.kwinrc = {
