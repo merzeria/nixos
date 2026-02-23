@@ -17,8 +17,8 @@
 
     # application style:
     configFile = {
-    "kdeglobals"."General"."widgetStyle" = "darkly";
-    #"kvantumrc"."General"."theme" = "catppuccin-mocha-mauve";
+    "kdeglobals"."General"."widgetStyle" = "kvantum";
+    "kvantumrc"."General"."theme" = "catppuccin-mocha-mauve";
   };
     panels = [
       {
