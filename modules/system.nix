@@ -155,6 +155,7 @@
     pulse.enable = true;
     # jack.enable = true;   # uncomment if you need JACK
   };
+  hardware.alsa.enablePersistence = true;
 
   # --------------------------------------------------------------
   # Printing
