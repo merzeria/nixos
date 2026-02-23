@@ -92,21 +92,23 @@
     # Declarative Autostart using standard XDG desktop files
   xdg.configFile = {
     "autostart/steam.desktop".text = ''
-      [Desktop Entry]
-      Name=Steam
-      Exec=${pkgs.steam}/bin/steam -silent
-      Type=Application
-      Terminal=false
-    '';
-    "autostart/equibop.desktop".text = ''
-      [Desktop Entry]
-      Type=Application
-      Exec=sh -c "sleep 15 && equibop"
-      Hidden=false
-      NoDisplay=false
-      X-GNOME-Autostart-enabled=true
-      Name=equibop (Delayed)
-      Comment=Starts equibop after KDE is settled to prevent crashes
+    [Desktop Entry]
+    Name=Steam
+    Exec=sh -c "sleep 10 && steam -silent %U"
+    Type=Application
+    Terminal=false
+    Icon=steam
+  '';
+
+  "autostart/equibop.desktop".text = ''
+    [Desktop Entry]
+    Type=Application
+    Exec=sh -c "sleep 10 && equibop"
+    Hidden=false
+    NoDisplay=false
+    X-GNOME-Autostart-enabled=true
+    Name=equibop (Delayed)
+    Comment=Starts equibop after KDE is settled to prevent crashes
   '';
   };
 }
