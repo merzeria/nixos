@@ -27,7 +27,6 @@
 
   #installed packages
   home.packages = with pkgs; [
-    legcord
     pcsx2
     neovim
     htop
@@ -37,6 +36,9 @@
     lutris
     goverlay
     mangohud
+    discordo
+    pkgs.moonlight
+    equibop
   ];
 
   programs.mangohud = {
@@ -101,15 +103,15 @@
       Type=Application
       Terminal=false
     '';
-    "autostart/legcord.desktop".text = ''
+    "autostart/equibop.desktop".text = ''
       [Desktop Entry]
       Type=Application
-      Exec=sh -c "sleep 15 && legcord"
+      Exec=sh -c "sleep 15 && equibop"
       Hidden=false
       NoDisplay=false
       X-GNOME-Autostart-enabled=true
-      Name=legcord (Delayed)
-      Comment=Starts legcord after KDE is settled to prevent crashes
+      Name=equibop (Delayed)
+      Comment=Starts equibop after KDE is settled to prevent crashes
   '';
   };
 }
