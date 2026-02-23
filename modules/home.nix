@@ -35,11 +35,7 @@
     lutris
     equibop
   ];
-  #Installed fonts
-  fonts.packages = with pkgs; [
-  nerd-fonts.fira-code
-  nerd-fonts.jetbrains-mono
-];
+
   programs.mangohud = {
     enable = true;
     # Optional: Enable it for all sessions (this adds MANGOHUD=1 to your env)
@@ -86,12 +82,20 @@
 
   programs.starship = {
   enable = true;
-  # Settings can be added here, but the defaults are great
+  # Settings can be added here:
   settings = {
-    add_newline = true;
+    # This uses the 'Tokyo Night' or 'Catppuccin' style colors
+    format = "$os$directory$git_branch$git_status$character";
+    os = {
+      disabled = false;
+      symbols.NixOS = " "; # The Nix Snowflake icon
+    };
+    directory = {
+      style = "bold cyan";
+    };
     character = {
-      success_symbol = "[➜](bold green)";
-      error_symbol = "[➜](bold red)";
+      success_symbol = "[󱄅](bold magenta)"; # A cool Nix-themed arrow
+      error_symbol = "[󱄅](bold red)";
     };
   };
 };

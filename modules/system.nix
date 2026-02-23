@@ -204,6 +204,11 @@
   # --------------------------------------------------------------
   # Global system packages (outside of Home‑Manager)
   # --------------------------------------------------------------
+  #Installed fonts
+  fonts.packages = with pkgs; [
+  nerd-fonts.fira-code
+  nerd-fonts.jetbrains-mono
+  ];
   environment.systemPackages = with pkgs; [
     vim
     wget
