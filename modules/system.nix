@@ -212,6 +212,9 @@
     alsa-utils
     equibop
     darkly
+    mangohud
+    gamescope-wsi
+    goverlay
     kdePackages.qtstyleplugin-kvantum # Kvantum for KDE
     libsForQt5.qtstyleplugin-kvantum
     catppuccin-sddm-corners
@@ -241,8 +244,8 @@
   programs.steam = {
     enable = true;
     # Using pkgs.proton-ge-bin directly ensures the path is correctly passed
-    extraCompatPackages = [
-      pkgs.proton-ge-bin
+    extraCompatPackages = with pkgs; [
+    proton-ge-bin
     ];
   };
   programs.gamemode.enable = true;

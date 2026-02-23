@@ -32,10 +32,7 @@
     htop
     floorp-bin
     pwvucontrol
-    gamescope-wsi
     lutris
-    goverlay
-    mangohud
     equibop
   ];
 
