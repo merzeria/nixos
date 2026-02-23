@@ -35,7 +35,11 @@
     lutris
     equibop
   ];
-
+  #Installed fonts
+  fonts.packages = with pkgs; [
+  nerd-fonts.fira-code
+  nerd-fonts.jetbrains-mono
+];
   programs.mangohud = {
     enable = true;
     # Optional: Enable it for all sessions (this adds MANGOHUD=1 to your env)
@@ -75,9 +79,23 @@
       push-nix = "cd ~/simonos && git add . && git commit -m \"Update: $(date +%Y-%m-%d)\" && git push";
     };
     initContent = ''
-      PROMPT='%F{cyan}%n@%m %F{yellow}%~ %F{reset}$ '
-    '';
+    # Show system info and Nix logo first
+    fastfetch
+  '';
   };
+
+  programs.starship = {
+  enable = true;
+  # Settings can be added here, but the defaults are great
+  settings = {
+    add_newline = true;
+    character = {
+      success_symbol = "[➜](bold green)";
+      error_symbol = "[➜](bold red)";
+    };
+  };
+};
+
   programs.git = {
   enable = true;
   settings = {

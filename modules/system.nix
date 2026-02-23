@@ -215,6 +215,7 @@
     mangohud
     gamescope-wsi
     goverlay
+    fastfetch
     kdePackages.qtstyleplugin-kvantum # Kvantum for KDE
     libsForQt5.qtstyleplugin-kvantum
     catppuccin-sddm-corners
