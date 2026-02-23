@@ -54,15 +54,10 @@
       };
     };
   };
-
-  programs.mangohud = {
+  #Shell-nix magic
+  programs.direnv = {
     enable = true;
-    settings = {
-      full = true;
-      no_display = true;
-      cpu_temp = true;
-      gpu_temp = true;
-      fps_limit = 120;
-    };
+    nix-direnv.enable = true;
+    enableZshIntegration = true; # Automatically hooks into Zsh
   };
 }
