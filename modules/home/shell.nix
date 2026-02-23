@@ -18,6 +18,8 @@
       set-catppuccin = "sudo nixos-rebuild switch --flake ~/simonos/#catppuccin";
       set-dragonized = "sudo nixos-rebuild switch --flake ~/simonos/#dragonized";
 
+      # Maintenance Wizard
+      clean-nix = "sudo nix-collect-garbage -d && nix-collect-garbage -d && nix-store --optimise";
       # Git backup
       push-nix = "cd ~/simonos && git add . && git commit -m \"Update: $(date +%Y-%m-%d)\" && git push";
     };

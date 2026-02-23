@@ -3,9 +3,11 @@
 {
   programs.git = {
     enable = true;
-    userName = "Simon Halberg";
-    userEmail = "stwhal@protonmail.com";
     settings = {
+      user = {
+        name = "Simon Halberg";
+        email = "stwhal@protonmail.com";
+      };
       init.defaultBranch = "main";
       safe.directory = [ "/home/simon/simonos" "/etc/nixos" ];
     };
