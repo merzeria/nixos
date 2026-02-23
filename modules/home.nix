@@ -84,18 +84,48 @@
   enable = true;
   # Settings can be added here:
   settings = {
-    # This uses the 'Tokyo Night' or 'Catppuccin' style colors
-    format = "$os$directory$git_branch$git_status$character";
+    # Link the palette to the theme
+    palette = "catppuccin_mocha";
+
+    # Customizing the prompt layout
+    format = "[](mauve)$os$directory[](fg:mauve bg:surface0)$git_branch$git_status[](fg:surface0) $character";
+
+    directory = {
+      style = "bg:mauve fg:crust";
+      format = "[ $path ]($style)";
+    };
+
     os = {
       disabled = false;
-      symbols.NixOS = " "; # The Nix Snowflake icon
+      style = "bg:mauve fg:crust";
+      symbols.NixOS = " ";
     };
-    directory = {
-      style = "bold cyan";
-    };
+
     character = {
-      success_symbol = "[󱄅](bold magenta)"; # A cool Nix-themed arrow
+      success_symbol = "[󱄅](bold magenta)";
       error_symbol = "[󱄅](bold red)";
+    };
+
+    # Define the Catppuccin Mocha colors
+    palettes.catppuccin_mocha = {
+      rosewater = "#f5e0dc";
+      flamingo = "#f2cdcd";
+      pink = "#f5c2e7";
+      mauve = "#cba6f7";
+      red = "#f38ba8";
+      maroon = "#eba0ac";
+      peach = "#fab387";
+      yellow = "#f9e2af";
+      green = "#a6e3a1";
+      teal = "#94e2d5";
+      sky = "#89dceb";
+      sapphire = "#74c7ec";
+      blue = "#89b4fa";
+      lavender = "#b4befe";
+      text = "#cdd6f4";
+      subtext1 = "#bac2de";
+      surface0 = "#313244";
+      crust = "#11111b";
     };
   };
 };
@@ -111,6 +141,22 @@
     safe.directory = [ "/home/simon/simonos" "/etc/nixos" ];
     };
   };
+    xdg.configFile."konsole/CatppuccinMocha.colorscheme".text = ''
+  [General]
+  Description=Catppuccin Mocha
+  Opacity=0.9
+
+  [Background]
+  Color=#1e1e2e
+
+  [Foreground]
+  Color=#cdd6f4
+
+  [Color0]
+  Color=#45475a
+  [Color0Intense]
+  Color=#585b70
+  '';
     # Declarative Autostart using standard XDG desktop files
   xdg.configFile = {
     "autostart/steam.desktop".text = ''
