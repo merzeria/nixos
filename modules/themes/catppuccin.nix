@@ -6,7 +6,7 @@
     workspace = {
       #lookAndFeel = "Catppuccin";
       colorScheme = "CatppuccinMochaMauve";
-      cursor.theme = "Catppuccin-Mocha-Mauve-Cursors";
+      cursor.theme = "catppuccin-mocha-Mauve-cursors";
       iconTheme = "Papirus-Dark";
       wallpaper = "${pkgs.nixos-artwork.wallpapers.catppuccin-mocha}/share/backgrounds/nixos/nixos-wallpaper-catppuccin-mocha.png";
       windowDecorations.library = "org.kde.kwin.aurorae";
@@ -26,7 +26,7 @@
         height = 36;
         screen = 0; # Main monitor
         widgets = [
-          "org.kde.plasma.kickoff"
+          { name = "org.kde.plasma.kickoff"; config.General.icon = ./icons/nix.svg; }
           "org.kde.plasma.icontasks"
           "org.kde.plasma.marginsseparator"
           "org.kde.plasma.systemtray"
@@ -38,7 +38,7 @@
     height = 36;
     screen = 1; # Second monitor
     widgets = [
-      "org.kde.plasma.kickoff"
+      { name = "org.kde.plasma.kickoff"; config.General.icon = ./icons/nix.svg; }
       "org.kde.plasma.icontasks"
       "org.kde.plasma.marginsseparator"
       "org.kde.plasma.systemtray"

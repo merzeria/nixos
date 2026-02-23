@@ -211,6 +211,7 @@
     git
     alsa-utils
     equibop
+    darkly
     kdePackages.qtstyleplugin-kvantum # Kvantum for KDE
     libsForQt5.qtstyleplugin-kvantum
     catppuccin-sddm-corners
