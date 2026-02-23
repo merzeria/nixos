@@ -15,10 +15,10 @@
       splashScreen.theme = "Catppuccin-Mocha-Mauve";
     };
 
-    # catppuccin supports Kvantum but can also use the standard style
+    # application style:
     configFile = {
-    "kdeglobals"."General"."widgetStyle" = "kvantum";
-    "kvantumrc"."General"."theme" = "catppuccin-mocha-mauve";
+    "kdeglobals"."General"."widgetStyle" = "darkly";
+    #"kvantumrc"."General"."theme" = "catppuccin-mocha-mauve";
   };
     panels = [
       {
@@ -26,7 +26,7 @@
         height = 36;
         screen = 0; # Main monitor
         widgets = [
-          { name = "org.kde.plasma.kickoff"; config.General.icon = ./icons/nix.svg; }
+          { name = "org.kde.plasma.kickoff"; config.General.icon = "${./icons/nix.svg}"; }
           "org.kde.plasma.icontasks"
           "org.kde.plasma.marginsseparator"
           "org.kde.plasma.systemtray"
@@ -38,7 +38,7 @@
     height = 36;
     screen = 1; # Second monitor
     widgets = [
-      { name = "org.kde.plasma.kickoff"; config.General.icon = ./icons/nix.svg; }
+      { name = "org.kde.plasma.kickoff"; config.General.icon = "${./icons/nix.svg}"; }
       "org.kde.plasma.icontasks"
       "org.kde.plasma.marginsseparator"
       "org.kde.plasma.systemtray"
