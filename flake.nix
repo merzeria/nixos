@@ -24,13 +24,13 @@
         specialArgs = { inherit inputs themeName; };
         modules = [
           ./hardware-configuration.nix
-          ./modules/system.nix
+          ./modules/system
           home-manager.nixosModules.home-manager # Critical: Loads HM module
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.extraSpecialArgs = { inherit inputs themeName; };
-            home-manager.users.${username} = import ./modules/home.nix;
+            home-manager.users.${username} = import ./modules/home;
           }
         ];
       };
