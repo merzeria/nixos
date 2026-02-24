@@ -40,4 +40,9 @@
     HandleLidSwitchExternalPower = "ignore";
     HandleLidSwitchDocked = "ignore";
   };
+  # This adds the necessary udev rules for VIA/VIAL web editors
+  services.udev.packages = with pkgs; [
+    via
+    vial
+  ];
 }
