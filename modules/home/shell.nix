@@ -22,7 +22,9 @@
       clean-nix = "sudo nix-collect-garbage -d && nix-collect-garbage -d && nix-store --optimise";
       # Git backup
       push-nix = "cd ~/simonos && git add . && git commit -m \"Update: $(date +%Y-%m-%d)\" && git push";
-    };
+      # Proton drive backup
+      protonbackup = "tar -czf /tmp/simonos-backup.tar.gz -C ~ simonos && rclone copy /tmp/simonos-backup.tar.gz proton:Backups/ --progress";
+   };
     initContent = ''
       fastfetch
       alias try="nix-shell -p"
@@ -69,8 +71,8 @@ systemd.user.services.backup-to-proton = {
     Description = "Backup simonos config to Proton Drive";
   };
   Service = {
-    ExecStart = "${pkgs.rclone}/bin/rclone sync /home/simon/simonos proton:Backups/simonos --verbose";
-  };
+  ExecStart = "${pkgs.bash}/bin/bash -c '${pkgs.gnutar}/bin/tar -czf /tmp/simonos-backup.tar.gz -C /home/simon simonos && ${pkgs.rclone}/bin/rclone copy /tmp/simonos-backup.tar.gz proton:Backups/'";
+};
   Install = {
     WantedBy = [ "default.target" ];
   };
