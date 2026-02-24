@@ -23,6 +23,7 @@
     pwvucontrol
     lutris
     equibop
+    rclone
   ];
 
   # Variables for Steam

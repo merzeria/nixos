@@ -13,7 +13,7 @@ pkgs.mkShell {
   shellHook = ''
     echo "--- ⌨️ Keychron Config Lab ---"
     echo "1. Open Brave: 'brave'"
-    echo "2. Go to: https://usevia.app or https://vial.rocks"
+    echo "2. Go to: https://launcher.keychron.com/"
     echo "3. Ensure your keyboard is plugged in."
     echo "------------------------------"
     lsusb | grep -i "Keychron" || echo "Warning: Keychron not detected in USB list."

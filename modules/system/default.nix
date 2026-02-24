@@ -8,6 +8,7 @@
     ./desktop.nix
     ./gaming.nix
     ./users.nix
+    ./backup.nix
   ];
 
   # Core Nix Settings

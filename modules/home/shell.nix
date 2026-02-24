@@ -60,4 +60,28 @@
     nix-direnv.enable = true;
     enableZshIntegration = true; # Automatically hooks into Zsh
   };
+    home.sessionVariables = {
+  DIRENV_LOG_FORMAT = "";
+};
+# Backup to protondrive
+systemd.user.services.backup-to-proton = {
+  Unit = {
+    Description = "Backup simonos config to Proton Drive";
+  };
+  Service = {
+    ExecStart = "${pkgs.rclone}/bin/rclone sync /home/simon/simonos proton:Backups/simonos --verbose";
+  };
+  Install = {
+    WantedBy = [ "default.target" ];
+  };
+};
+
+systemd.user.timers.backup-to-proton = {
+  Unit.Description = "Daily backup of Nix config to Proton";
+  Timer = {
+    OnCalendar = "daily";
+    Persistent = true;
+  };
+  Install.WantedBy = [ "timers.target" ];
+};
 }
