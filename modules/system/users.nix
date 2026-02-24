@@ -29,6 +29,7 @@
     fastfetch
     gamescope-wsi
     goverlay
+    restic
     kdePackages.qtstyleplugin-kvantum
     libsForQt5.qtstyleplugin-kvantum
     catppuccin-sddm-corners
