@@ -2,24 +2,24 @@
 
 {
   services.restic.backups.daily = {
-    # Where to save the backup. Change this to your backup drive path!
-    repository = "/mnt/games/nixbackup/";
+    # Replace local path with your Backblaze bucket
+    repository = "b2:nixosbackup:simonos-backup";
 
-    # Password file so it can run automatically (create this file manually)
+    # Keep your existing password file
     passwordFile = "/etc/nixos/restic-password";
 
-    # What to back up
+    # File containing B2_ACCOUNT_ID and B2_ACCOUNT_KEY
+    environmentFile = "/etc/nixos/restic-b2-env";
+
     paths = [
       "/home/simon/simonos"
     ];
 
-    # When to run (Daily at 2 AM)
     timerConfig = {
       OnCalendar = "02:00";
-      Persistent = true; # Run immediately if the PC was off at 2 AM
+      Persistent = true;
     };
 
-    # Keep only the last 7 daily, 4 weekly, and 12 monthly backups
     pruneOpts = [
       "--keep-daily 7"
       "--keep-weekly 4"
