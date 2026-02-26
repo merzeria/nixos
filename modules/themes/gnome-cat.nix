@@ -1,17 +1,22 @@
 { pkgs, ... }:
 
 {
+  # --- SYSTEM LEVEL ---
   environment.systemPackages = with pkgs; [
     catppuccin-gtk
     papirus-icon-theme
-    # NEW: Individual font package name
     nerd-fonts.jetbrains-mono
   ];
 
+  # --- USER LEVEL ---
   home-manager.users.simon = {
+    # Home Manager uses 'home.packages', not 'environment.systemPackages'
+    home.packages = with pkgs; [
+      # Add user-only tools here if needed
+    ];
+
     dconf.enable = true;
 
-    # Consolodated GTK settings from desktop.nix
     gtk = {
       enable = true;
       theme = {
@@ -31,7 +36,6 @@
       "org/gnome/mutter" = {
         experimental-features = [ "scale-monitor-framebuffer" ];
       };
-
       "org/gnome/desktop/interface" = {
         color-scheme = "prefer-dark";
         gtk-theme = "catppuccin-mocha-mauve-standard";
@@ -40,7 +44,6 @@
         monospace-font-name = "JetBrainsMono Nerd Font 10";
         icon-theme = "Papirus-Dark";
       };
-
       "org/gnome/Console" = {
         font-name = "JetBrainsMono Nerd Font 12";
         use-system-font = false;
