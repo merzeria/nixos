@@ -6,12 +6,23 @@
     catppuccin-gtk
     papirus-icon-theme
     nerd-fonts.jetbrains-mono
+    catppuccin-cursors.mochaMauve
   ];
 
   # USER LEVEL: Home Manager settings
   home-manager.users.simon = {
     dconf.enable = true;
 
+    # 1. Pointer Cursor belongs directly under the user block
+    home.pointerCursor = {
+      gtk.enable = true;
+      x11.enable = true;
+      name = "catppuccin-mocha-mauve-cursors"; 
+      package = pkgs.catppuccin-cursors.mochaMauve; 
+      size = 24;
+    };
+
+    # 2. GTK theme settings are separate
     gtk = {
       enable = true;
       theme = {
@@ -25,7 +36,7 @@
         name = "Papirus-Dark";
         package = pkgs.papirus-icon-theme;
       };
-    };
+    }; # This bracket closes the GTK block
 
     dconf.settings = {
       "org/gnome/mutter".experimental-features = [ "scale-monitor-framebuffer" ];
