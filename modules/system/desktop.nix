@@ -37,7 +37,7 @@
     services.displayManager.sddm.enable = lib.mkForce false;
 
     # Turn on GNOME
-    services.xserver.desktopManager.gnome.enable = true;
+    services.desktopManager.gnome.enable = true;
     services.displayManager.gdm.enable = true;
     services.displayManager.gdm.wayland = true;
 

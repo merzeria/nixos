@@ -10,6 +10,7 @@
       dracula = "sudo nixos-rebuild test --flake ~/simonos/#dracula";
       catppuccin = "sudo nixos-rebuild test --flake ~/simonos/#catppuccin";
       dragonized = "sudo nixos-rebuild test --flake ~/simonos/#dragonized";
+      gnome-cat = "sudo nixos-rebuild test --flake ~/simonos/#gnome-cat";
 
       # Permanent switch aliases
       set-sweet = "sudo nixos-rebuild switch --flake ~/simonos/#sweet";
@@ -17,6 +18,7 @@
       set-dracula = "sudo nixos-rebuild switch --flake ~/simonos/#dracula";
       set-catppuccin = "sudo nixos-rebuild switch --flake ~/simonos/#catppuccin";
       set-dragonized = "sudo nixos-rebuild switch --flake ~/simonos/#dragonized";
+      set-gnome-cat = "sudo nixos-rebuild switch --flake ~/simonos/#catppuccin";
 
       # Maintenance Wizard
       clean-nix = "sudo nix-collect-garbage -d && nix-collect-garbage -d && nix-store --optimise";

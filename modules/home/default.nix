@@ -9,8 +9,7 @@
     ./shell.nix
     ./git.nix
     ./desktop.nix
-    (import ../plasma.nix { inherit pkgs themeName; })
-  ];
+ ] ++ (if (themeName != "gnome-cat") then [(import ../plasma.nix { inherit pkgs themeName; })] else []);
 
   home.username = "simon";
   home.homeDirectory = "/home/simon";

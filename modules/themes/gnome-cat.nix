@@ -1,20 +1,15 @@
 { pkgs, ... }:
 
 {
-  # --- SYSTEM LEVEL ---
+  # SYSTEM LEVEL: Global packages for GNOME
   environment.systemPackages = with pkgs; [
     catppuccin-gtk
     papirus-icon-theme
     nerd-fonts.jetbrains-mono
   ];
 
-  # --- USER LEVEL ---
+  # USER LEVEL: Home Manager settings
   home-manager.users.simon = {
-    # Home Manager uses 'home.packages', not 'environment.systemPackages'
-    home.packages = with pkgs; [
-      # Add user-only tools here if needed
-    ];
-
     dconf.enable = true;
 
     gtk = {
@@ -33,9 +28,7 @@
     };
 
     dconf.settings = {
-      "org/gnome/mutter" = {
-        experimental-features = [ "scale-monitor-framebuffer" ];
-      };
+      "org/gnome/mutter".experimental-features = [ "scale-monitor-framebuffer" ];
       "org/gnome/desktop/interface" = {
         color-scheme = "prefer-dark";
         gtk-theme = "catppuccin-mocha-mauve-standard";
