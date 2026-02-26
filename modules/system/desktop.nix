@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   services.xserver.enable = true;
@@ -29,5 +29,22 @@
     enable = true;
     platformTheme = "kde";
     style = "kvantum";
+  };
+  # --- Gnome specialisation ---
+  specialisation.gnome.configuration = {
+    # Turn off the KDE stuff defined above
+    services.desktopManager.plasma6.enable = lib.mkForce false;
+    services.displayManager.sddm.enable = lib.mkForce false;
+
+    # Turn on GNOME
+    services.xserver.desktopManager.gnome.enable = true;
+    services.displayManager.gdm.enable = true;
+    services.displayManager.gdm.wayland = true;
+
+    environment.systemPackages = with pkgs; [
+      gnome-tweaks
+      gnome-extension-manager
+      catppuccin-gtk
+    ];
   };
 }
