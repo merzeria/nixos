@@ -41,6 +41,7 @@
         dracula = mkHost "dracula";
         catppuccin = mkHost "catppuccin";
         dragonized = mkHost "dragonized";
+        gnome-cat = mkHost "gnome-cat";
       };
     };
 }

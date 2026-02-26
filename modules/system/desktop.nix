@@ -41,10 +41,39 @@
     services.displayManager.gdm.enable = true;
     services.displayManager.gdm.wayland = true;
 
+    # Import your new dedicated theme file
+    imports = [ ../themes/gnome-cat.nix ];
+
     environment.systemPackages = with pkgs; [
       gnome-tweaks
       gnome-extension-manager
-      catppuccin-gtk
+      catppuccin-kvantum
+      glib
     ];
+    # This tells Gnome to actually apply the themes
+  home-manager.users.simon = {
+    gtk = {
+      enable = true;
+      theme = {
+        name = "catppuccin-mocha-mauve-standard"; # Or your preferred flavor
+        package = pkgs.catppuccin-gtk.override {
+          accents = [ "mauve" ];
+          variant = "mocha";
+        };
+      };
+      iconTheme = {
+        name = "Papirus-Dark";
+        package = pkgs.papirus-icon-theme;
+      };
+    };
+
+    # Force Gnome Shell to use the dark theme
+    dconf.settings = {
+      "org/gnome/desktop/interface" = {
+        color-scheme = "prefer-dark";
+        gtk-theme = "catppuccin-mocha-mauve-standard";
+      };
+    };
+   };  
   };
 }
