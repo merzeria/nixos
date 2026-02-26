@@ -1,57 +1,50 @@
 { pkgs, ... }:
 
 {
-  # System-wide packages for this theme
   environment.systemPackages = with pkgs; [
     catppuccin-gtk
     papirus-icon-theme
-    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+    # NEW: Individual font package name
+    nerd-fonts.jetbrains-mono
   ];
 
-  home-manager.users.simonos = {
-    # Set the cursor/icon/font settings specifically for GNOME
+  home-manager.users.simon = {
+    dconf.enable = true;
+
+    # Consolodated GTK settings from desktop.nix
+    gtk = {
+      enable = true;
+      theme = {
+        name = "catppuccin-mocha-mauve-standard";
+        package = pkgs.catppuccin-gtk.override {
+          accents = [ "mauve" ];
+          variant = "mocha";
+        };
+      };
+      iconTheme = {
+        name = "Papirus-Dark";
+        package = pkgs.papirus-icon-theme;
+      };
+    };
+
     dconf.settings = {
       "org/gnome/mutter" = {
         experimental-features = [ "scale-monitor-framebuffer" ];
-        };
+      };
+
       "org/gnome/desktop/interface" = {
+        color-scheme = "prefer-dark";
+        gtk-theme = "catppuccin-mocha-mauve-standard";
         font-name = "Ubuntu 11";
         document-font-name = "Ubuntu 11";
         monospace-font-name = "JetBrainsMono Nerd Font 10";
         icon-theme = "Papirus-Dark";
       };
-    };
 
-    # Set up the terminal (GNOME Console/KGX) to use the new font
-    programs.gnome-console = {
-      enable = true;
-      font = "JetBrainsMono Nerd Font 12";
+      "org/gnome/Console" = {
+        font-name = "JetBrainsMono Nerd Font 12";
+        use-system-font = false;
+      };
     };
   };
 }
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-simonos/modules/themes/gnome-cat.nix [+]                                                                                                                                         1,1            All
-
