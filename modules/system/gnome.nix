@@ -17,7 +17,7 @@
     epiphany
     geary
     totem
-    software
+    gnome-software
   ];
 
   environment.systemPackages = with pkgs; [
