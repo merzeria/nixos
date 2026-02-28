@@ -28,6 +28,7 @@
     gnomeExtensions.arcmenu
     gnomeExtensions.dash-to-dock
     gnomeExtensions.just-perfection
+    gnomeExtensions.user-themes
     (colloid-gtk-theme.override {
       themeVariants = [ "pink" ];
       colorVariants  = [ "dark" ];
@@ -51,6 +52,7 @@
           "arcmenu@arcmenu.com"
           "dash-to-dock@micxgx.gmail.com"
           "just-perfection-desktop@just-perfection"
+          "user-theme@gnome-shell-extensions.gcampax.github.com"
         ];
         disable-user-extensions = false;
       };
@@ -144,6 +146,7 @@
         ${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
         ${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface font-name 'Noto Sans 11'
         ${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface monospace-font-name 'JetBrainsMono Nerd Font 10'
+        ${pkgs.glib}/bin/gsettings set org.gnome.shell.extensions.user-theme name 'Colloid-Pink-Dark'
       '';
     };
   };
