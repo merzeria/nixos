@@ -36,6 +36,5 @@
   # Pull in the Home Manager GNOME config for simon
   home-manager.users.simon = {
     imports = [ ../home/gnome.nix ];
-    _module.args.isGnome = true;
   };
 }
