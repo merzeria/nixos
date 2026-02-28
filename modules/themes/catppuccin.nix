@@ -48,15 +48,18 @@
   };
 
   # Catppuccin Mocha colour scheme defined in modules/home/desktop.nix
-  xdg.dataFile."konsole/simon.profile".text = ''
-    [Appearance]
-    ColorScheme=Catppuccin Mocha
-    Font=JetBrainsMono Nerd Font,10,-1,5,50,0,0,0,0,0
+  xdg.dataFile."konsole/simon.profile" = {
+    force = true;
+    text = ''
+      [Appearance]
+      ColorScheme=Catppuccin Mocha
+      Font=JetBrainsMono Nerd Font,10,-1,5,50,0,0,0,0,0
 
-    [General]
-    Name=simon
-    Parent=FALLBACK/
-  '';
+      [General]
+      Name=simon
+      Parent=FALLBACK/
+    '';
+  };
 
   home.packages = with pkgs; [
     catppuccin-cursors.mochaMauve

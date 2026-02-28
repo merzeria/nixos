@@ -19,9 +19,13 @@
       systemd-boot = {
         enable = true;
         configurationLimit = 10;
-        # Boot into GNOME specialisation by default using glob pattern
-        extraConfig = ''
-          default nixos-generation-*-specialisation-gnome.conf
+        extraInstallCommands = ''
+          entry=$(ls /boot/loader/entries/ | grep specialisation-gnome | sort -t- -k3 -n | tail -1 | sed 's/\.conf$//')
+          if [ -n "$entry" ]; then
+            echo "default $entry.conf" > /boot/loader/loader.conf
+            echo "timeout 5" >> /boot/loader/loader.conf
+            echo "console-mode keep" >> /boot/loader/loader.conf
+          fi
         '';
       };
       timeout = 5;
