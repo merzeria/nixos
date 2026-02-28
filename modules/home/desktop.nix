@@ -2,7 +2,10 @@
 
 {
   # Konsole Catppuccin Colorscheme
-  xdg.configFile."konsole/CatppuccinMocha.colorscheme".text = ''
+  xdg.dataFile."konsole/CatppuccinMocha.colorscheme" = {
+  force = true;
+  text = ''
+
   [General]
   Description=Catppuccin Mocha
   Opacity=0.9
@@ -66,6 +69,7 @@
   [Color7Intense]
   Color=#a6adc8
   '';
+  };
 
   # Delayed Autostart
   xdg.configFile = {
