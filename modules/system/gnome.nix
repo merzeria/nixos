@@ -17,17 +17,17 @@
   environment.gnome.excludePackages = with pkgs; [
     gnome-tour
     gnome-music
-    epiphany   # GNOME browser
-    geary      # GNOME mail
-    totem      # GNOME video player
+    epiphany
+    geary
+    totem
   ];
 
   # System packages needed for GNOME theming and tooling
   environment.systemPackages = with pkgs; [
     gnome-tweaks
     gnome-extension-manager
-    glib          # Provides gsettings CLI if needed
-    catppuccin-gtk.override { accents = [ "mauve" ]; variant = "mocha"; }
+    glib
+    (catppuccin-gtk.override { accents = [ "mauve" ]; variant = "mocha"; })
     papirus-icon-theme
     nerd-fonts.jetbrains-mono
     catppuccin-cursors.mochaMauve

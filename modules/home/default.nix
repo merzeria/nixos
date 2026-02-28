@@ -1,4 +1,4 @@
-{ inputs, pkgs, themeName, ... }:
+{ inputs, pkgs, themeName, isGnome ? false, ... }:
 
 {
   imports = [
@@ -7,7 +7,7 @@
     ./shell.nix
     ./git.nix
     ./desktop.nix
-    ] ++ (if !isGnome then [ (import ../plasma.nix { inherit pkgs themeName; }) ] else []);
+  ] ++ (if !isGnome then [ (import ../plasma.nix { inherit pkgs themeName; }) ] else []);
 
   home.username = "simon";
   home.homeDirectory = "/home/simon";
