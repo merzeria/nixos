@@ -27,7 +27,6 @@
   };
 
   # Persist ALSA mixer settings (e.g. headset volume levels) across reboots
-  # alsa-utils must be in systemPackages (it is, in users.nix)
   systemd.services.alsa-store.enable = true;
   systemd.services.alsa-restore.enable = true;
 
