@@ -3,6 +3,7 @@
 {
   programs.plasma = {
     enable = true;
+
     workspace = {
       cursor.theme = "Sweet-cursors";
       iconTheme = "candy-icons";
@@ -13,21 +14,67 @@
       splashScreen.theme = "Sweet";
     };
 
+    fonts = {
+      general     = { family = "Noto Sans";               pointSize = 10; };
+      fixedWidth  = { family = "JetBrainsMono Nerd Font"; pointSize = 10; };
+      small       = { family = "Noto Sans";               pointSize = 8;  };
+      toolbar     = { family = "Noto Sans";               pointSize = 10; };
+      menu        = { family = "Noto Sans";               pointSize = 10; };
+      windowTitle = { family = "Noto Sans"; pointSize = 10; weight = 700; };
+    };
+
     configFile = {
       "kdeglobals"."General"."widgetStyle" = "kvantum";
-      "kvantumrc"."General"."theme" = "Sweet-transparent-toolbar";
+      "kvantumrc"."General"."theme"        = "Sweet-transparent-toolbar";
+
+      # Use the Sweet Konsole profile (same palette as dragonized)
+      "konsolerc"."Desktop Entry"."DefaultProfile" = "Sweet.profile";
+
+      # KWin Effects
+      "kwinrc"."Plugins" = {
+        blurEnabled                      = true;
+        kwin4_effect_translucencyEnabled = true;
+        slidebackEnabled                 = true;
+        minimizeanimationEnabled         = true;
+      };
+
+      "kwinrc"."Effect-blur" = {
+        BlurStrength  = 10;
+        NoiseStrength = 2;
+      };
+
+      "kwinrc"."Effect-translucency" = {
+        Active    = 100;
+        Inactive  = 88;
+        MoveResize = 80;
+        Dialogs   = 100;
+        Desktop   = 100;
+      };
+
+      "kwinrc"."Compositing" = {
+        AnimationSpeed     = 2;
+        Backend            = "OpenGL";
+        GLPreferBufferSwap = "a";
+        OpenGLIsUnsafe     = false;
+      };
+
+      "kwinrc"."Windows" = {
+        FocusPolicy                = "ClickToFocus";
+        RaiseOnClick               = true;
+        TitlebarDoubleClickCommand = "MaximizeFull";
+      };
+
+      "kwinrc"."Effect-slide".Duration = 300;
     };
 
     panels = [
-      # --- MONITOR 1 (Main) ---
       {
         location = "top";
         height = 26;
         screen = 0;
         widgets = [
           "org.kde.plasma.kickoff"
-         # "org.kde.plasma.windowtitle" # This is built-in to Plasma 6!
-          "org.kde.plasma.appmenu" # Global Menu
+          "org.kde.plasma.appmenu"
           "org.kde.plasma.panelspacer"
           "org.kde.plasma.systemtray"
           "org.kde.plasma.digitalclock"
@@ -40,19 +87,16 @@
         alignment = "center";
         lengthMode = "fit";
         floating = true;
-        hiding = "dodgewindows"; # This makes the dock hide when a window covers it
+        hiding = "dodgewindows";
         widgets = [ "org.kde.plasma.icontasks" ];
       }
-
-      # --- MONITOR 2 (Secondary) ---
       {
         location = "top";
         height = 26;
         screen = 1;
         widgets = [
           "org.kde.plasma.kickoff"
-         # "org.kde.plasma.windowtitle" # This is built-in to Plasma 6!
-          "org.kde.plasma.appmenu" # Global Menu
+          "org.kde.plasma.appmenu"
           "org.kde.plasma.panelspacer"
           "org.kde.plasma.systemtray"
           "org.kde.plasma.digitalclock"
@@ -75,5 +119,6 @@
     sweet-nova
     sweet
     candy-icons
+    noto-fonts
   ];
 }
