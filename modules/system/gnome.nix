@@ -10,7 +10,7 @@
   services.displayManager.gdm.wayland   = true;
 
   # Use GTK theming instead of KDE's Qt layer
-  qt.platformTheme = lib.mkForce "gtk";
+  qt.platformTheme = lib.mkForce "gnome";
   qt.style         = lib.mkForce "adwaita-dark";
 
   # Remove some GNOME bloat
