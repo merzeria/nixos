@@ -17,6 +17,7 @@
     epiphany
     geary
     totem
+    software
   ];
 
   environment.systemPackages = with pkgs; [
@@ -74,11 +75,10 @@
       "org/gnome/mutter" = {
         experimental-features    = [ "scale-monitor-framebuffer" ];
         edge-tiling              = true;
-        workspaces-only-on-primary = false;
       };
 
       "org/gnome/shell/extensions/auto-move-windows" = {
-        application-list = [ "equibop.desktop:2" ];
+        application-list = [ "equibop.desktop:1" ];
       };
 
       "org/gnome/shell/extensions/blur-my-shell/panel" = {
