@@ -50,7 +50,7 @@
   # Catppuccin Mocha colour scheme defined in modules/home/desktop.nix
   xdg.dataFile."konsole/simon.profile".text = ''
     [Appearance]
-    ColorScheme=CatppuccinMocha
+    ColorScheme=Catppuccin Mocha
     Font=JetBrainsMono Nerd Font,10,-1,5,50,0,0,0,0,0
 
     [General]

@@ -19,6 +19,14 @@
       systemd-boot = {
         enable = true;
         configurationLimit = 10;
+        # Boot into GNOME specialisation by default
+        # Entry name matches /boot/loader/entries/nixos-specialisation-gnome.conf
+        extraInstallCommands = ''
+          entry=$(ls /boot/loader/entries/ | grep specialisation-gnome | sort -t- -k3 -n | tail -1 | sed 's/\.conf//')
+          if [ -n "$entry" ]; then
+            sed -i "s/^default .*/default $entry/" /boot/loader/loader.conf
+          fi
+        '';
       };
       timeout = 5;
       efi.canTouchEfiVariables = true;

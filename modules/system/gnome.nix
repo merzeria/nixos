@@ -86,7 +86,7 @@ in
         blur             = true;
         brightness       = 0.8;
         override-background = true;
-        style-dash-to-dock  = 2; # behind dock style, works with transparency
+        style-dash-to-dock  = mkInt32 2;
       };
       "org/gnome/shell/extensions/blur-my-shell/overview" = {
         blur     = true;
