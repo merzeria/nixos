@@ -14,7 +14,7 @@
   gtk = {
     enable = true;
     theme = {
-      name    = "Fluent-purple-Dark";
+      name    = "Fluent-round-purple-Dark";
       package = pkgs.fluent-gtk-theme.override {
         themeVariants = [ "purple" ];
         colorVariants  = [ "dark" ];
@@ -48,7 +48,7 @@
     # Desktop appearance
     "org/gnome/desktop/interface" = {
       color-scheme          = "prefer-dark";
-      gtk-theme             = "Fluent-purple-Dark";
+      gtk-theme             = "Fluent-round-purple-Dark";
       icon-theme            = "Papirus-Dark";
       cursor-theme          = "catppuccin-mocha-mauve-cursors";
       cursor-size           = 24;

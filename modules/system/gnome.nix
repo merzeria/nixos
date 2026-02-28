@@ -43,10 +43,10 @@
     nerd-fonts.jetbrains-mono
   ];
 
-  # Required for AppIndicator (Steam, Discord tray icons)
+  # Required for AppIndicator tray icons (Steam, Equibop etc)
   services.udev.packages = with pkgs; [ gnome-settings-daemon ];
 
-  home-manager.users.simon = {
-    imports = [ ../home/gnome.nix ];
-  };
+  # Use sharedModules instead of users.simon to avoid conflicting
+  # with the HM config already set up in flake.nix
+  home-manager.sharedModules = [ ../home/gnome.nix ];
 }
