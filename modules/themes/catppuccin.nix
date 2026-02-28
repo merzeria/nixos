@@ -17,6 +17,7 @@
       "kdeglobals"."General"."widgetStyle" = "kvantum";
       "kvantumrc"."General"."theme" = "catppuccin-mocha-mauve";
       "konsolerc"."Desktop Entry"."DefaultProfile" = "simon.profile";
+      "konsolerc"."UiSettings"."ColorScheme" = "Catppuccin Mocha";
     };
 
     panels = [
