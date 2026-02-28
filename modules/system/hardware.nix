@@ -16,6 +16,14 @@
     package = config.boot.kernelPackages.nvidiaPackages.beta;
   };
 
+  # Restart plasmashell if NVIDIA EGL race condition causes a crash on boot
+  systemd.user.services.plasma-plasmashell = {
+    serviceConfig = {
+      Restart = "on-failure";
+      RestartSec = 3;
+    };
+  };
+
   # Audio / PipeWire
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -25,6 +33,7 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
+
   # Persist ALSA mixer settings (e.g. headset volume levels) across reboots
   # alsa-utils must be in systemPackages (it is, in users.nix)
   systemd.services.alsa-store.enable = true;
@@ -43,7 +52,8 @@
     HandleLidSwitchExternalPower = "ignore";
     HandleLidSwitchDocked = "ignore";
   };
-  # This adds the necessary udev rules for VIA/VIAL web editors
+
+  # udev rules for VIA/VIAL web editors
   services.udev.packages = with pkgs; [
     via
     vial
