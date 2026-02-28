@@ -8,7 +8,6 @@
     ./git.nix
     ./desktop.nix
     ] ++ (if !isGnome then [ (import ../plasma.nix { inherit pkgs themeName; }) ] else []);
-  ];
 
   home.username = "simon";
   home.homeDirectory = "/home/simon";
