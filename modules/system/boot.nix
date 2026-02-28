@@ -34,13 +34,10 @@
   };
 
   # Set GNOME specialisation as default boot entry after bootloader writes loader.conf
-  system.activationScripts.gnomeBootDefault = {
-    text = ''
-      entry=$(ls /boot/loader/entries/ 2>/dev/null | grep specialisation-gnome | sort -t- -k3 -n | tail -1 | sed 's/\.conf$//')
-      if [ -n "$entry" ]; then
-        sed -i "s/^default .*/default $entry.conf/" /boot/loader/loader.conf
-      fi
-    '';
-    deps = [ "specialisation" ];
-  };
+  system.activationScripts.gnomeBootDefault = ''
+    entry=$(ls /boot/loader/entries/ 2>/dev/null | grep specialisation-gnome | sort -t- -k3 -n | tail -1 | sed 's/\.conf$//')
+    if [ -n "$entry" ]; then
+      sed -i "s/^default .*/default $entry.conf/" /boot/loader/loader.conf
+    fi
+  '';
 }
