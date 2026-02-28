@@ -26,6 +26,7 @@ in
     configFile = {
       "kwinrc"."Plugins".blurEnabled = true;
       "kdeglobals"."General"."widgetStyle" = "kvantum";
+      "konsolerc"."Desktop Entry"."DefaultProfile" = "simon.profile";
     };
 
     panels = [

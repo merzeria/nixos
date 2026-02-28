@@ -15,6 +15,7 @@
 
     configFile = {
       "kdeglobals"."General"."widgetStyle" = "kvantum";
+      "konsolerc"."Desktop Entry"."DefaultProfile" = "simon.profile";
     };
 
     panels = [
