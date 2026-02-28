@@ -3,7 +3,7 @@
 {
   # Konsole Catppuccin Colorscheme
   xdg.configFile."konsole/CatppuccinMocha.colorscheme".text = ''
-    [General]
+  [General]
   Description=Catppuccin Mocha
   Opacity=0.9
   Wallpaper=
@@ -64,7 +64,7 @@
   [Color7]
   Color=#bac2de
   [Color7Intense]
-  color=#a6adc8
+  Color=#a6adc8
   '';
 
   # Delayed Autostart
