@@ -23,15 +23,11 @@
     gnome-tweaks
     gnome-extension-manager
     glib
-
-    # Extensions
     gnomeExtensions.appindicator
     gnomeExtensions.blur-my-shell
     gnomeExtensions.arcmenu
     gnomeExtensions.dash-to-dock
     gnomeExtensions.just-perfection
-
-    # Theme
     (fluent-gtk-theme.override {
       themeVariants = [ "purple" ];
       colorVariants  = [ "dark" ];
@@ -43,10 +39,93 @@
     nerd-fonts.jetbrains-mono
   ];
 
-  # Required for AppIndicator tray icons (Steam, Equibop etc)
   services.udev.packages = with pkgs; [ gnome-settings-daemon ];
 
-  # Use sharedModules instead of users.simon to avoid conflicting
-  # with the HM config already set up in flake.nix
-  home-manager.sharedModules = [ ../home/gnome.nix ];
+  programs.dconf.profiles.user.databases = [{
+    lockAll = false;
+    settings = with lib.gvariant; {
+      "org/gnome/shell" = {
+        enabled-extensions = [
+          "appindicatorsupport@rgcjonas.gmail.com"
+          "blur-my-shell@aunetx"
+          "arcmenu@arcmenu.com"
+          "dash-to-dock@micxgx.gmail.com"
+          "just-perfection-desktop@just-perfection"
+        ];
+        disable-user-extensions = false;
+      };
+
+      "org/gnome/desktop/interface" = {
+        color-scheme        = "prefer-dark";
+        gtk-theme           = "Fluent-round-purple-Dark";
+        icon-theme          = "Papirus-Dark";
+        cursor-theme        = "catppuccin-mocha-mauve-cursors";
+        cursor-size         = mkUint32 24;
+        font-name           = "Noto Sans 11";
+        document-font-name  = "Noto Sans 11";
+        monospace-font-name = "JetBrainsMono Nerd Font 10";
+        enable-hot-corners  = false;
+      };
+
+      "org/gnome/mutter" = {
+        experimental-features = [ "scale-monitor-framebuffer" ];
+        edge-tiling           = true;
+      };
+
+      "org/gnome/shell/extensions/blur-my-shell/panel" = {
+        blur       = true;
+        brightness = 0.75;
+        pipeline   = "pipeline_default";
+      };
+      "org/gnome/shell/extensions/blur-my-shell/dash-to-dock" = {
+        blur       = true;
+        brightness = 0.6;
+        pipeline   = "pipeline_default_rounded";
+      };
+      "org/gnome/shell/extensions/blur-my-shell/overview" = {
+        blur     = true;
+        pipeline = "pipeline_default";
+      };
+
+      "org/gnome/shell/extensions/dash-to-dock" = {
+        dock-position           = "BOTTOM";
+        dock-fixed              = false;
+        intellihide             = true;
+        autohide                = true;
+        extend-height           = false;
+        dash-max-icon-size      = mkInt32 48;
+        show-trash              = false;
+        show-mounts             = false;
+        transparency-mode       = "FIXED";
+        background-opacity      = 0.7;
+        running-indicator-style = "DOTS";
+        apply-custom-theme      = false;
+      };
+
+      "org/gnome/shell/extensions/arcmenu" = {
+        menu-layout            = "Eleven";
+        menu-button-appearance = "Icon";
+      };
+
+      "org/gnome/shell/extensions/just-perfection" = {
+        panel-size                     = mkInt32 32;
+        activities-button              = false;
+        app-menu                       = false;
+        search                         = true;
+        animation                      = mkInt32 2;
+        window-demands-attention-focus = true;
+      };
+
+      "org/gnome/desktop/wm/preferences" = {
+        button-layout  = "appmenu:minimize,maximize,close";
+        num-workspaces = mkInt32 4;
+        focus-mode     = "click";
+      };
+
+      "org/gnome/Console" = {
+        font-name       = "JetBrainsMono Nerd Font 12";
+        use-system-font = false;
+      };
+    };
+  }];
 }
