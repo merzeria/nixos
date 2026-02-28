@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   programs.plasma = {
@@ -12,14 +12,11 @@
       windowDecorations.theme = "__aurorae__svg__CatppuccinMocha-Classic";
       splashScreen.theme = "Catppuccin-Mocha-Mauve";
     };
-
     configFile = {
       "kdeglobals"."General"."widgetStyle" = "kvantum";
       "kvantumrc"."General"."theme" = "catppuccin-mocha-mauve";
       "konsolerc"."Desktop Entry"."DefaultProfile" = "simon.profile";
-      "konsolerc"."UiSettings"."ColorScheme" = "Catppuccin Mocha";
     };
-
     panels = [
       {
         location = "bottom";
@@ -48,19 +45,10 @@
     ];
   };
 
-  # Catppuccin Mocha colour scheme defined in modules/home/desktop.nix
-  xdg.dataFile."konsole/simon.profile" = {
-    force = true;
-    text = ''
-      [Appearance]
-      ColorScheme=Catppuccin Mocha
-      Font=JetBrainsMono Nerd Font,10,-1,5,50,0,0,0,0,0
-
-      [General]
-      Name=simon
-      Parent=FALLBACK/
-    '';
-  };
+  home.activation.konsoleProfile = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    printf '[Appearance]\nColorScheme=Catppuccin Mocha\nFont=JetBrainsMono Nerd Font,10,-1,5,50,0,0,0,0,0\n\n[General]\nName=simon\nParent=FALLBACK/\n' \
+      > "$HOME/.local/share/konsole/simon.profile"
+  '';
 
   home.packages = with pkgs; [
     catppuccin-cursors.mochaMauve
