@@ -19,14 +19,6 @@
       systemd-boot = {
         enable = true;
         configurationLimit = 10;
-        extraInstallCommands = ''
-          entry=$(ls /boot/loader/entries/ | grep specialisation-gnome | sort -t- -k3 -n | tail -1 | sed 's/\.conf$//')
-          if [ -n "$entry" ]; then
-            echo "default $entry.conf" > /boot/loader/loader.conf
-            echo "timeout 5" >> /boot/loader/loader.conf
-            echo "console-mode keep" >> /boot/loader/loader.conf
-          fi
-        '';
       };
       timeout = 5;
       efi.canTouchEfiVariables = true;
@@ -39,5 +31,16 @@
         (pkgs.catppuccin-plymouth.override { variant = "mocha"; })
       ];
     };
+  };
+
+  # Set GNOME specialisation as default boot entry after bootloader writes loader.conf
+  system.activationScripts.gnomeBootDefault = {
+    text = ''
+      entry=$(ls /boot/loader/entries/ 2>/dev/null | grep specialisation-gnome | sort -t- -k3 -n | tail -1 | sed 's/\.conf$//')
+      if [ -n "$entry" ]; then
+        sed -i "s/^default .*/default $entry.conf/" /boot/loader/loader.conf
+      fi
+    '';
+    deps = [ "specialisation" ];
   };
 }
