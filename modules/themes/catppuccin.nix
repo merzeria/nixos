@@ -46,7 +46,7 @@
   };
 
   home.activation.konsoleProfile = lib.hm.dag.entryAfter ["writeBoundary"] ''
-    printf '[Appearance]\nColorScheme=Catppuccin Mocha\nFont=JetBrainsMono Nerd Font,10,-1,5,50,0,0,0,0,0\n\n[General]\nName=simon\nParent=FALLBACK/\n' \
+    printf '[Appearance]\nColorScheme=CatppuccinMocha\nFont=JetBrainsMono Nerd Font,10,-1,5,50,0,0,0,0,0\n\n[General]\nName=simon\nParent=FALLBACK/\n' \
       > "$HOME/.local/share/konsole/simon.profile"
   '';
 
