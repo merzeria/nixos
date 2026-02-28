@@ -28,19 +28,19 @@
     gnomeExtensions.arcmenu
     gnomeExtensions.dash-to-dock
     gnomeExtensions.just-perfection
-    (fluent-gtk-theme.override {
-      themeVariants = [ "purple" ];
+    (colloid-gtk-theme.override {
+      themeVariants = [ "pink" ];
       colorVariants  = [ "dark" ];
-      sizeVariants   = [ "standard" ];
-      tweaks         = [ "round" "float" ];
+      tweaks         = [ "rimless" "black" ];
     })
-    papirus-icon-theme
+    colloid-icon-theme
     catppuccin-cursors.mochaMauve
     nerd-fonts.jetbrains-mono
   ];
 
   services.udev.packages = with pkgs; [ gnome-settings-daemon ];
 
+  # Apply dconf settings at system level
   programs.dconf.profiles.user.databases = [{
     lockAll = false;
     settings = with lib.gvariant; {
@@ -57,8 +57,8 @@
 
       "org/gnome/desktop/interface" = {
         color-scheme        = "prefer-dark";
-        gtk-theme           = "Fluent-round-purple-Dark";
-        icon-theme          = "Papirus-Dark";
+        gtk-theme           = "Colloid-Pink-Dark";
+        icon-theme          = "Colloid-pink-dark";
         cursor-theme        = "catppuccin-mocha-mauve-cursors";
         cursor-size         = mkUint32 24;
         font-name           = "Noto Sans 11";
@@ -128,4 +128,23 @@
       };
     };
   }];
+
+  # Force theme settings on login to override any stale user dconf values
+  # from previous KDE sessions
+  systemd.user.services.gnome-theme-apply = {
+    description = "Apply GNOME theme settings on login";
+    wantedBy    = [ "graphical-session.target" ];
+    after       = [ "graphical-session.target" ];
+    serviceConfig = {
+      Type      = "oneshot";
+      ExecStart = pkgs.writeShellScript "gnome-theme-apply" ''
+        ${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface gtk-theme 'Colloid-Pink-Dark'
+        ${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface icon-theme 'Colloid-pink-dark'
+        ${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface cursor-theme 'catppuccin-mocha-mauve-cursors'
+        ${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+        ${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface font-name 'Noto Sans 11'
+        ${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface monospace-font-name 'JetBrainsMono Nerd Font 10'
+      '';
+    };
+  };
 }
