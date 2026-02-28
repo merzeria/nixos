@@ -146,7 +146,7 @@
         ${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
         ${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface font-name 'Noto Sans 11'
         ${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface monospace-font-name 'JetBrainsMono Nerd Font 10'
-        ${pkgs.glib}/bin/gsettings set org.gnome.shell.extensions.user-theme name 'Colloid-Pink-Dark'
+        ${pkgs.glib}/bin/dconf write /org/gnome/shell/extensions/user-theme/name "'Colloid-Pink-Dark'" || true
       '';
     };
   };
