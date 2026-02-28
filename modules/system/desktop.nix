@@ -30,25 +30,9 @@
     platformTheme = "kde";
     style = "kvantum";
   };
-  # --- Gnome specialisation ---
+
+  # --- GNOME specialisation ---
   specialisation.gnome.configuration = {
-    # Turn off the KDE stuff defined above
-    services.desktopManager.plasma6.enable = lib.mkForce false;
-    services.displayManager.sddm.enable = lib.mkForce false;
-
-    # Turn on GNOME
-    services.desktopManager.gnome.enable = true;
-    services.displayManager.gdm.enable = true;
-    services.displayManager.gdm.wayland = true;
-
-    # Import your new dedicated theme file
-    imports = [ ../themes/gnome-cat.nix ];
-
-    environment.systemPackages = with pkgs; [
-      gnome-tweaks
-      gnome-extension-manager
-      catppuccin-kvantum
-      glib
-    ];
+    imports = [ ./gnome.nix ];
   };
 }

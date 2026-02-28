@@ -1,5 +1,5 @@
 {
-  description = "Simon’s NixOS + Home‑Manager + Plasma‑Manager flake";
+  description = "Simon's NixOS + Home‑Manager + Plasma‑Manager flake";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -25,7 +25,7 @@
         modules = [
           ./hardware-configuration.nix
           ./modules/system
-          home-manager.nixosModules.home-manager # Critical: Loads HM module
+          home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
@@ -36,12 +36,11 @@
       };
     in {
       nixosConfigurations = {
-        sweet  = mkHost "sweet";
-        nordic = mkHost "nordic";
-        dracula = mkHost "dracula";
+        sweet      = mkHost "sweet";
+        nordic     = mkHost "nordic";
+        dracula    = mkHost "dracula";
         catppuccin = mkHost "catppuccin";
         dragonized = mkHost "dragonized";
-        gnome-cat = mkHost "gnome-cat";
       };
     };
 }
