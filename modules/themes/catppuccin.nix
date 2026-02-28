@@ -16,7 +16,6 @@
     configFile = {
       "kdeglobals"."General"."widgetStyle" = "kvantum";
       "kvantumrc"."General"."theme" = "catppuccin-mocha-mauve";
-      "konsolerc"."Desktop Entry"."DefaultProfile" = "Catppuccin.profile";
     };
 
     panels = [
@@ -47,15 +46,14 @@
     ];
   };
 
-  # Catppuccin Mocha colour scheme already defined in modules/home/desktop.nix
-  # Just need the profile to activate it
-  xdg.configFile."konsole/Catppuccin.profile".text = ''
+  # Catppuccin Mocha colour scheme defined in modules/home/desktop.nix
+  xdg.dataFile."konsole/simon.profile".text = ''
     [Appearance]
     ColorScheme=CatppuccinMocha
     Font=JetBrainsMono Nerd Font,10,-1,5,50,0,0,0,0,0
 
     [General]
-    Name=Catppuccin
+    Name=simon
     Parent=FALLBACK/
   '';
 

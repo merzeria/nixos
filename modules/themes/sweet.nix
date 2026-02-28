@@ -25,7 +25,6 @@ in
     configFile = {
       "kdeglobals"."General"."widgetStyle" = "kvantum";
       "kvantumrc"."General"."theme" = "Sweet-transparent-toolbar";
-      "konsolerc"."Desktop Entry"."DefaultProfile" = "Sweet.profile";
     };
 
     panels = [
@@ -34,8 +33,6 @@ in
     ];
   };
 
-  # Sweet and Dragonized share the same colour scheme and profile
-  # since they use the same Sweet palette — defined here, reused by dragonized
   xdg.configFile."konsole/Sweet.colorscheme".text = ''
     [General]
     Description=Sweet
@@ -93,13 +90,13 @@ in
     Color=#ffffff
   '';
 
-  xdg.configFile."konsole/Sweet.profile".text = ''
+  xdg.dataFile."konsole/simon.profile".text = ''
     [Appearance]
     ColorScheme=Sweet
     Font=JetBrainsMono Nerd Font,10,-1,5,50,0,0,0,0,0
 
     [General]
-    Name=Sweet
+    Name=simon
     Parent=FALLBACK/
   '';
 

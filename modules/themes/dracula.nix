@@ -15,7 +15,6 @@
 
     configFile = {
       "kdeglobals"."General"."widgetStyle" = "kvantum";
-      "konsolerc"."Desktop Entry"."DefaultProfile" = "Dracula.profile";
     };
 
     panels = [
@@ -103,13 +102,13 @@
     Color=#ffffff
   '';
 
-  xdg.configFile."konsole/Dracula.profile".text = ''
+  xdg.dataFile."konsole/simon.profile".text = ''
     [Appearance]
     ColorScheme=Dracula
     Font=JetBrainsMono Nerd Font,10,-1,5,50,0,0,0,0,0
 
     [General]
-    Name=Dracula
+    Name=simon
     Parent=FALLBACK/
   '';
 

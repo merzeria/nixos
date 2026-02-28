@@ -26,7 +26,6 @@ in
     configFile = {
       "kwinrc"."Plugins".blurEnabled = true;
       "kdeglobals"."General"."widgetStyle" = "kvantum";
-      "konsolerc"."Desktop Entry"."DefaultProfile" = "Nordic.profile";
     };
 
     panels = [
@@ -92,13 +91,13 @@ in
     Color=#eceff4
   '';
 
-  xdg.configFile."konsole/Nordic.profile".text = ''
+  xdg.dataFile."konsole/simon.profile".text = ''
     [Appearance]
     ColorScheme=Nordic
     Font=JetBrainsMono Nerd Font,10,-1,5,50,0,0,0,0,0
 
     [General]
-    Name=Nordic
+    Name=simon
     Parent=FALLBACK/
   '';
 

@@ -26,12 +26,10 @@
     configFile = {
       "kdeglobals"."General"."widgetStyle" = "kvantum";
       "kvantumrc"."General"."theme"        = "Sweet-transparent-toolbar";
-      "konsolerc"."Desktop Entry"."DefaultProfile" = "Sweet.profile";
 
-      # KWin Effects - Plasma 6 key names
       "kwinrc"."Plugins" = {
         blurEnabled              = true;
-        translucencyEnabled      = true;  # Plasma 6 (was kwin4_effect_translucencyEnabled)
+        translucencyEnabled      = true;
         slidebackEnabled         = true;
         minimizeanimationEnabled = true;
       };
@@ -170,13 +168,14 @@
     Color=#ffffff
   '';
 
-  xdg.configFile."konsole/Sweet.profile".text = ''
+  # Override the simon profile to use Sweet colours
+  xdg.dataFile."konsole/simon.profile".text = ''
     [Appearance]
     ColorScheme=Sweet
     Font=JetBrainsMono Nerd Font,10,-1,5,50,0,0,0,0,0
 
     [General]
-    Name=Sweet
+    Name=simon
     Parent=FALLBACK/
   '';
 
