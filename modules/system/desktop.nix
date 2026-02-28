@@ -12,7 +12,7 @@
       theme = "catppuccin-sddm-corners";
     };
     autoLogin = {
-      enable = true;
+      enable = lib.mkForce false;
       user = "simon";
     };
   };

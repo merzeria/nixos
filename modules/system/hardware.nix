@@ -11,20 +11,9 @@
 
   hardware.nvidia = {
     modesetting.enable = true;
-    powerManagement.enable = false;
+    powerManagement.enable = true;
     open = true;
     package = config.boot.kernelPackages.nvidiaPackages.beta;
-  };
-
-  # Delay plasmashell start to avoid NVIDIA EGL race condition on boot
-  systemd.user.services.plasmashell-nvidia-wait = {
-    description = "Wait for NVIDIA EGL before plasmashell";
-    wantedBy = [ "plasma-plasmashell.service" ];
-    before = [ "plasma-plasmashell.service" ];
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStart = "${pkgs.coreutils}/bin/sleep 3";
-    };
   };
 
   # Audio / PipeWire
