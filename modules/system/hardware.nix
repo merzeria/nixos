@@ -16,11 +16,14 @@
     package = config.boot.kernelPackages.nvidiaPackages.beta;
   };
 
-  # Restart plasmashell if NVIDIA EGL race condition causes a crash on boot
-  systemd.user.services.plasma-plasmashell = {
+  # Delay plasmashell start to avoid NVIDIA EGL race condition on boot
+  systemd.user.services.plasmashell-nvidia-wait = {
+    description = "Wait for NVIDIA EGL before plasmashell";
+    wantedBy = [ "plasma-plasmashell.service" ];
+    before = [ "plasma-plasmashell.service" ];
     serviceConfig = {
-      Restart = "on-failure";
-      RestartSec = 3;
+      Type = "oneshot";
+      ExecStart = "${pkgs.coreutils}/bin/sleep 3";
     };
   };
 
