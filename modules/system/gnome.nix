@@ -58,7 +58,7 @@
       "org/gnome/desktop/interface" = {
         color-scheme        = "prefer-dark";
         gtk-theme           = "Colloid-Pink-Dark";
-        icon-theme          = "Colloid-pink-dark";
+        icon-theme          = "Colloid-Dark";
         cursor-theme        = "catppuccin-mocha-mauve-cursors";
         cursor-size         = mkUint32 24;
         font-name           = "Noto Sans 11";
@@ -139,7 +139,7 @@
       Type      = "oneshot";
       ExecStart = pkgs.writeShellScript "gnome-theme-apply" ''
         ${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface gtk-theme 'Colloid-Pink-Dark'
-        ${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface icon-theme 'Colloid-pink-dark'
+        ${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface icon-theme 'Colloid-Dark'
         ${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface cursor-theme 'catppuccin-mocha-mauve-cursors'
         ${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
         ${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface font-name 'Noto Sans 11'
