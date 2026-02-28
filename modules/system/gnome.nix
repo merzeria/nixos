@@ -1,5 +1,8 @@
 { pkgs, lib, ... }:
 
+let
+  userThemeSchemaDir = "/run/current-system/sw/share/gnome-shell/extensions/user-theme@gnome-shell-extensions.gcampax.github.com/schemas";
+in
 {
   services.desktopManager.plasma6.enable = lib.mkForce false;
   services.displayManager.sddm.enable    = lib.mkForce false;
@@ -41,7 +44,6 @@
 
   services.udev.packages = with pkgs; [ gnome-settings-daemon ];
 
-  # Apply dconf settings at system level
   programs.dconf.profiles.user.databases = [{
     lockAll = false;
     settings = with lib.gvariant; {
@@ -79,10 +81,12 @@
         brightness = 0.75;
         pipeline   = "pipeline_default";
       };
+      # Let dash-to-dock handle its own transparency, just enable blur
       "org/gnome/shell/extensions/blur-my-shell/dash-to-dock" = {
-        blur       = true;
-        brightness = 0.6;
-        pipeline   = "pipeline_default_rounded";
+        blur             = true;
+        brightness       = 0.8;
+        override-background = true;
+        style-dash-to-dock  = 2; # behind dock style, works with transparency
       };
       "org/gnome/shell/extensions/blur-my-shell/overview" = {
         blur     = true;
@@ -98,8 +102,7 @@
         dash-max-icon-size      = mkInt32 48;
         show-trash              = false;
         show-mounts             = false;
-        transparency-mode       = "FIXED";
-        background-opacity      = 0.7;
+        transparency-mode       = "DYNAMIC"; # looks better with blur
         running-indicator-style = "DOTS";
         apply-custom-theme      = false;
       };
@@ -131,8 +134,6 @@
     };
   }];
 
-  # Force theme settings on login to override any stale user dconf values
-  # from previous KDE sessions
   systemd.user.services.gnome-theme-apply = {
     description = "Apply GNOME theme settings on login";
     wantedBy    = [ "graphical-session.target" ];
@@ -146,7 +147,7 @@
         ${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
         ${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface font-name 'Noto Sans 11'
         ${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface monospace-font-name 'JetBrainsMono Nerd Font 10'
-        ${pkgs.glib}/bin/dconf write /org/gnome/shell/extensions/user-theme/name "'Colloid-Pink-Dark'" || true
+        ${pkgs.glib}/bin/gsettings --schemadir ${userThemeSchemaDir} set org.gnome.shell.extensions.user-theme name 'Colloid-Pink-Dark'
       '';
     };
   };
