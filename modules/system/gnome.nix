@@ -1,8 +1,5 @@
 { pkgs, lib, ... }:
 
-let
-  userThemeSchemaDir = "/run/current-system/sw/share/gnome-shell/extensions/user-theme@gnome-shell-extensions.gcampax.github.com/schemas";
-in
 {
   services.desktopManager.plasma6.enable = lib.mkForce false;
   services.displayManager.sddm.enable    = lib.mkForce false;
@@ -32,6 +29,7 @@ in
     gnomeExtensions.dash-to-dock
     gnomeExtensions.just-perfection
     gnomeExtensions.user-themes
+    gnomeExtensions.auto-move-windows
     (colloid-gtk-theme.override {
       themeVariants = [ "pink" ];
       colorVariants  = [ "dark" ];
@@ -44,6 +42,7 @@ in
 
   services.udev.packages = with pkgs; [ gnome-settings-daemon ];
 
+  # Apply dconf settings at system level
   programs.dconf.profiles.user.databases = [{
     lockAll = false;
     settings = with lib.gvariant; {
@@ -55,6 +54,7 @@ in
           "dash-to-dock@micxgx.gmail.com"
           "just-perfection-desktop@just-perfection"
           "user-theme@gnome-shell-extensions.gcampax.github.com"
+          "auto-move-windows@gnome-shell-extensions.gcampax.github.com"
         ];
         disable-user-extensions = false;
       };
@@ -72,8 +72,13 @@ in
       };
 
       "org/gnome/mutter" = {
-        experimental-features = [ "scale-monitor-framebuffer" ];
-        edge-tiling           = true;
+        experimental-features    = [ "scale-monitor-framebuffer" ];
+        edge-tiling              = true;
+        workspaces-only-on-primary = false;
+      };
+
+      "org/gnome/shell/extensions/auto-move-windows" = {
+        application-list = [ "equibop.desktop:2" ];
       };
 
       "org/gnome/shell/extensions/blur-my-shell/panel" = {
@@ -81,12 +86,10 @@ in
         brightness = 0.75;
         pipeline   = "pipeline_default";
       };
-      # Let dash-to-dock handle its own transparency, just enable blur
       "org/gnome/shell/extensions/blur-my-shell/dash-to-dock" = {
-        blur             = true;
-        brightness       = 0.8;
-        override-background = true;
-        style-dash-to-dock  = mkInt32 2;
+        blur       = true;
+        brightness = 0.6;
+        pipeline   = "pipeline_default_rounded";
       };
       "org/gnome/shell/extensions/blur-my-shell/overview" = {
         blur     = true;
@@ -102,7 +105,8 @@ in
         dash-max-icon-size      = mkInt32 48;
         show-trash              = false;
         show-mounts             = false;
-        transparency-mode       = "DYNAMIC"; # looks better with blur
+        transparency-mode       = "FIXED";
+        background-opacity      = 0.7;
         running-indicator-style = "DOTS";
         apply-custom-theme      = false;
       };
@@ -134,6 +138,8 @@ in
     };
   }];
 
+  # Force theme settings on login to override any stale user dconf values
+  # from previous KDE sessions
   systemd.user.services.gnome-theme-apply = {
     description = "Apply GNOME theme settings on login";
     wantedBy    = [ "graphical-session.target" ];
@@ -147,7 +153,7 @@ in
         ${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
         ${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface font-name 'Noto Sans 11'
         ${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface monospace-font-name 'JetBrainsMono Nerd Font 10'
-        ${pkgs.glib}/bin/gsettings --schemadir ${userThemeSchemaDir} set org.gnome.shell.extensions.user-theme name 'Colloid-Pink-Dark'
+        ${pkgs.glib}/bin/dconf write /org/gnome/shell/extensions/user-theme/name "'Colloid-Pink-Dark'" || true
       '';
     };
   };
