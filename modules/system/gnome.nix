@@ -31,6 +31,7 @@
     gnomeExtensions.just-perfection
     gnomeExtensions.user-themes
     gnomeExtensions.auto-move-windows
+    gnomeExtensions.app-grid-wizard
     (colloid-gtk-theme.override {
       themeVariants = [ "pink" ];
       colorVariants  = [ "dark" ];
