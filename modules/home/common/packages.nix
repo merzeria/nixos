@@ -9,5 +9,6 @@
     equibop
     rclone
     obsidian
+    syncthing
   ];
 }
