@@ -8,5 +8,6 @@
     pwvucontrol
     equibop
     rclone
+    obsidian
   ];
 }
