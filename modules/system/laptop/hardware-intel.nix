@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   # Intel UHD 620 iGPU — modesetting driver is handled automatically
@@ -49,8 +49,8 @@
   services.fprintd.enable = true;
 
   security.pam.services = {
-    login.fprintAuth = true;
-    gdm.fprintAuth   = true;
-    sudo.fprintAuth  = true;
+    login.fprintAuth = lib.mkForce true;
+    gdm.fprintAuth   = lib.mkForce true;
+    sudo.fprintAuth  = lib.mkForce true;
   };
 }
