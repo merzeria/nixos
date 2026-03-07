@@ -44,4 +44,13 @@
 
   # udev rules for VIA/VIAL keyboard editors
   services.udev.packages = with pkgs; [ via vial ];
+  
+  # Fingerprint reader
+  services.fprintd.enable = true;
+
+  security.pam.services = {
+    login.fprintAuth = true;
+    gdm.fprintAuth   = true;
+    sudo.fprintAuth  = true;
+  };
 }
