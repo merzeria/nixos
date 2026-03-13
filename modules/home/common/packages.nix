@@ -5,6 +5,7 @@
     neovim
     htop
     floorp-bin
+    brave
     pwvucontrol
     equibop
     rclone

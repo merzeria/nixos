@@ -6,5 +6,6 @@
     ./gnome.nix
     ./gaming.nix
     ./niri.nix
+    ./kde.nix
   ];
 }
