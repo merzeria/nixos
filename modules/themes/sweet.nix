@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, isLaptop, ... }:
 
 let
   myWidgets = [
@@ -28,6 +28,7 @@ in
     };
     panels = [
       { location = "bottom"; height = 36; screen = 0; widgets = myWidgets; }
+      ] ++ lib.optionals (!isLaptop) [
       { location = "bottom"; height = 36; screen = 1; widgets = myWidgets; }
     ];
   };

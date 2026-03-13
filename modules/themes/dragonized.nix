@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, isLaptop, ... }:
 
 {
   programs.plasma = {
@@ -77,6 +77,7 @@
         hiding = "dodgewindows";
         widgets = [ "org.kde.plasma.icontasks" ];
       }
+      ] ++ lib.optionals (!isLaptop) [
       {
         location = "top";
         height = 26;

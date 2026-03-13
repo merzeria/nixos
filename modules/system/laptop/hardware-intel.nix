@@ -46,7 +46,6 @@
   services.udev.packages = with pkgs; [ 
   via 
   vial
-  brightnessctl
   ];
   
   services.udev.extraRules = ''

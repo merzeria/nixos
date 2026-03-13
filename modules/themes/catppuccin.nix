@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, isLaptop ... }:
 
 {
   programs.plasma = {
@@ -32,6 +32,7 @@
           "org.kde.plasma.digitalclock"
         ];
       }
+      ] ++ lib.optionals (!isLaptop) [
       {
         location = "bottom";
         height = 36;

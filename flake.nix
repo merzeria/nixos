@@ -27,14 +27,14 @@ noctalia = {
       # Desktop: KDE + themes + GNOME specialisation + NVIDIA + gaming
       mkDesktop = themeName: nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = { inherit inputs themeName; };
+        specialArgs = { inherit inputs themeName isLaptop = false; };
         modules = [
           ./hosts/desktop
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs      = true;
             home-manager.useUserPackages    = true;
-            home-manager.extraSpecialArgs   = { inherit inputs themeName; };
+            home-manager.extraSpecialArgs   = { inherit inputs themeName isLaptop = false; };
             home-manager.users.${username}  = import ./modules/home/desktop;
           }
         ];
@@ -43,14 +43,14 @@ noctalia = {
       # Laptop: Intel iGPU + TLP
       mkLaptop = themeName: nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = { inherit inputs themeName; };
+        specialArgs = { inherit inputs themeName isLaptop = true; };
         modules = [
           ./hosts/laptop
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs      = true;
             home-manager.useUserPackages    = true;
-            home-manager.extraSpecialArgs   = { inherit inputs themeName; };
+            home-manager.extraSpecialArgs   = { inherit inputs themeName isLaptop = true; };
             home-manager.users.${username}  = import ./modules/home/laptop;
           }
         ];
