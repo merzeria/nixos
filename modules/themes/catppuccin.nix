@@ -5,7 +5,7 @@
     enable = true;
     workspace = {
       colorScheme = "CatppuccinMochaMauve";
-      cursor.theme = "catppuccin-mocha-Mauve-cursors";
+      cursor.theme = "catppuccin-mocha-mauve-cursors";
       iconTheme = "Papirus-Dark";
       wallpaper = "${pkgs.nixos-artwork.wallpapers.catppuccin-mocha}/share/backgrounds/nixos/nixos-wallpaper-catppuccin-mocha.png";
       windowDecorations.library = "org.kde.kwin.aurorae";
@@ -16,7 +16,12 @@
       "kdeglobals"."General"."widgetStyle" = "kvantum";
       "kvantumrc"."General"."theme" = "catppuccin-mocha-mauve";
       "konsolerc"."Desktop Entry"."DefaultProfile" = "simon.profile";
+      "konsolerc"."MainWindow"."ProfileList" = "simon.profile";
     };
+    home.activation.konsoleProfile = lib.hm.dag.entryAfter ["writeBoundary"] ''
+  printf '[Appearance]\nColorScheme=Catppuccin-Mocha\nFont=JetBrainsMono Nerd Font,10,-1,5,50,0,0,0,0,0\n\n[General]\nName=simon\nParent=FALLBACK/\n' \
+    > "$HOME/.local/share/konsole/simon.profile"
+'';
     panels = [
       {
         location = "bottom";
