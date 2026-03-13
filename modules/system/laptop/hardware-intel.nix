@@ -61,4 +61,19 @@
     gdm.fprintAuth   = lib.mkForce true;
     sudo.fprintAuth  = lib.mkForce true;
   };
+
+  # KDE mousepad settings
+  services.libinput = {
+  enable = true;
+  touchpad = {
+    accelSpeed = "0.3";        # adjust between -1 and 1 to taste
+    naturalScrolling = true;
+    tapping = true;
+    disableWhileTyping = true;
+  };
+  mouse = {
+    accelSpeed = "0.3";        # for the trackpoint
+    naturalScrolling = false;  # usually prefer normal scrolling on a mouse
+  };
+ };
 }

@@ -30,5 +30,6 @@
     fastfetch
     restic
     android-tools
+    kdePackages.plasma-browser-integration
   ];
 }
