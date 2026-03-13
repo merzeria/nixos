@@ -21,9 +21,10 @@
   };
 
   environment.systemPackages = with pkgs; [
-    kdePackages.qtstyleplugin-kvantum
-    (catppuccin-kde.override         { flavour = ["mocha"]; accents = ["mauve"]; winDecStyles = ["classic"]; })
-    (catppuccin-papirus-folders.override { flavor = "mocha"; accent = "mauve"; })
-    (catppuccin-kvantum.override     { variant = "mocha"; accent = "mauve"; })
-  ];
+  kdePackages.qtstyleplugin-kvantum
+  catppuccin-cursors.mochaMauve    # add this
+  (catppuccin-kde.override         { flavour = ["mocha"]; accents = ["mauve"]; winDecStyles = ["classic"]; })
+  (catppuccin-papirus-folders.override { flavor = "mocha"; accent = "mauve"; })
+  (catppuccin-kvantum.override     { variant = "mocha"; accent = "mauve"; })
+];
 }
