@@ -6,23 +6,14 @@
   services.flatpak.enable              = true;
 
   services.displayManager = {
-    sddm = {
+    plasma-login-manager = {
       enable          = true;
-      wayland.enable  = true;
-      theme           = "catppuccin-sddm-corners";
     };
     autoLogin = {
       enable = true;
       user   = "simon";
     };
   };
-
-  # SDDM theme config — written to the theme's expected path
-  environment.etc."sddm/themes/catppuccin-sddm-corners/theme.conf.user".text = ''
-    [General]
-    Flavor=mocha
-    Accent=mauve
-  '';
 
   qt = {
     enable        = true;

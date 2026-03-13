@@ -41,7 +41,7 @@ noctalia = {
       };
 
       # Laptop: Intel iGPU + TLP
-      mkLaptop = nixpkgs.lib.nixosSystem {
+      mkLaptop = themeName: nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = { inherit inputs themeName; };
         modules = [

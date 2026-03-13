@@ -4,7 +4,7 @@
 {
   imports = [
     # Dynamically loads ./themes/sweet.nix, ./themes/nordic.nix etc.
-    ./themes/${themeName}.nix
+    ./modules//themes/${themeName}.nix
   ];
 
   # Common Plasma settings applied to ALL themes
