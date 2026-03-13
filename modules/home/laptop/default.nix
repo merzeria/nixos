@@ -3,8 +3,8 @@
 {
   imports = [
     ../common
-    ./gnome.nix
     ./desktop.nix
     ./niri
+    ../../../plasma.nix
   ];
 }

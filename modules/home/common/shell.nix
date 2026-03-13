@@ -18,8 +18,19 @@
       set-catppuccin = "sudo nixos-rebuild switch --flake ~/simonos/#catppuccin --impure";
       set-dragonized = "sudo nixos-rebuild switch --flake ~/simonos/#dragonized --impure";
 
-      # Laptop rebuild
-      set-laptop = "sudo nixos-rebuild switch --flake ~/simonos/#laptop --impure";
+      # Laptop theme testing
+    laptop-sweet      = "sudo nixos-rebuild test   --flake ~/simonos/#laptop-sweet      --impure";
+    laptop-nordic     = "sudo nixos-rebuild test   --flake ~/simonos/#laptop-nordic     --impure";
+    laptop-dracula    = "sudo nixos-rebuild test   --flake ~/simonos/#laptop-dracula    --impure";
+    laptop-catppuccin = "sudo nixos-rebuild test   --flake ~/simonos/#laptop-catppuccin --impure";
+    laptop-dragonized = "sudo nixos-rebuild test   --flake ~/simonos/#laptop-dragonized --impure";
+
+    # Laptop permanent switch
+    set-laptop-sweet      = "sudo nixos-rebuild switch --flake ~/simonos/#laptop-sweet      --impure";
+    set-laptop-nordic     = "sudo nixos-rebuild switch --flake ~/simonos/#laptop-nordic     --impure";
+    set-laptop-dracula    = "sudo nixos-rebuild switch --flake ~/simonos/#laptop-dracula    --impure";
+    set-laptop-catppuccin = "sudo nixos-rebuild switch --flake ~/simonos/#laptop-catppuccin --impure";
+    set-laptop-dragonized = "sudo nixos-rebuild switch --flake ~/simonos/#laptop-dragonized --impure";
 
       # Maintenance
       clean-nix    = "sudo nix-collect-garbage -d && nix-collect-garbage -d && nix-store --optimise";

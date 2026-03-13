@@ -40,17 +40,17 @@ noctalia = {
         ];
       };
 
-      # Laptop: GNOME only + Intel iGPU + TLP
+      # Laptop: Intel iGPU + TLP
       mkLaptop = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = { inherit inputs; };
+        specialArgs = { inherit inputs themeName; };
         modules = [
           ./hosts/laptop
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs      = true;
             home-manager.useUserPackages    = true;
-            home-manager.extraSpecialArgs   = { inherit inputs; };
+            home-manager.extraSpecialArgs   = { inherit inputs themeName; };
             home-manager.users.${username}  = import ./modules/home/laptop;
           }
         ];
@@ -66,7 +66,11 @@ noctalia = {
         dragonized = mkDesktop "dragonized";
 
         # Laptop
-        laptop = mkLaptop;
+        laptop-sweet      = mkLaptop "sweet";
+        laptop-nordic     = mkLaptop "nordic";
+        laptop-dracula    = mkLaptop "dracula";
+        laptop-catppuccin = mkLaptop "catppuccin";
+        laptop-dragonized = mkLaptop "dragonized";
       };
     };
 }
