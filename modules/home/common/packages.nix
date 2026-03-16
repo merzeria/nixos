@@ -12,5 +12,6 @@
     obsidian
     syncthing
     mediawriter
+    spotify
   ];
 }
