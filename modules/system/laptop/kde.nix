@@ -8,11 +8,11 @@
   sddm = {
     enable         = true;
     wayland.enable = true;
+  settings.Autologin.Session ="niri";
   };
   autoLogin = {
     enable = true;
     user   = "simon";
-    session = "niri";
   };
 };
 
