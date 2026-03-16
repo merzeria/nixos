@@ -5,14 +5,15 @@
   services.flatpak.enable              = true;
 
  services.displayManager = {
-    plasma-login-manager = {
-      enable          = true;
-    };
-    autoLogin = {
-      enable = true;
-      user   = "simon";
-    };
+  sddm = {
+    enable         = true;
+    wayland.enable = true;
   };
+  autoLogin = {
+    enable = true;
+    user   = "simon";
+  };
+};
 
   qt = {
     enable        = true;

@@ -35,6 +35,7 @@
       # Maintenance
       clean-nix    = "sudo nix-collect-garbage -d && nix-collect-garbage -d && nix-store --optimise";
       push-nix     = "cd ~/simonos && git add . && git commit -m \"Update: $(date +%Y-%m-%d)\" && git push";
+      pull-nix = "cd ~/simonos && git pull origin main --rebase";
       restic-check = "sudo B2_ACCOUNT_ID=$(grep B2_ACCOUNT_ID /etc/nixos/restic-b2-env | cut -d'\"' -f2) B2_ACCOUNT_KEY=$(grep B2_ACCOUNT_KEY /etc/nixos/restic-b2-env | cut -d'\"' -f2) restic -r b2:nixosbackup:simonos-backup -p /etc/nixos/restic-password snapshots";
     };
 
