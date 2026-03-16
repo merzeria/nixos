@@ -13,6 +13,7 @@
       "kwalletrc"."Wallet"."Enabled" = false;
       #"kwinrc"."Windows"."WindowMenuTimeout" = 5000;
       ksmserverrc.General.loginMode = "emptySession";
+      "plasmanotifyrc"."Applications/org.kde.konsole"."ShowPopups" = false;
     };
 
     configFile.kwinrc = {
@@ -28,7 +29,6 @@
       "EdgeBarrier"."EdgeBarrier"                           = { value = 0;     immutable = true; };
       "EdgeBarrier"."CornerBarrier"                         = { value = false; immutable = true; };
       "ScreenEdges".Enabled                                 = { value = false; immutable = true; };
-      "plasmanotifyrc"."Applications/org.kde.konsole"."ShowPopups" = false;
     };
 
     configFile.kscreenlockerrc.Daemon.Autolock    = false;
