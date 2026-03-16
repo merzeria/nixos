@@ -12,7 +12,7 @@
   autoLogin = {
     enable = true;
     user   = "simon";
-    session = "niri"
+    session = "niri";
   };
 };
 
