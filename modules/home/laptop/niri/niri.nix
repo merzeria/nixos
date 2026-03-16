@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, inputs, ... }: {
   home.packages = with pkgs; [
     kitty
     wl-clipboard
@@ -30,7 +30,9 @@
 
     layout {
         gaps 8
-
+        struts {
+        top 0
+        }
         preset-column-widths {
             proportion 0.5
             proportion 0.667
@@ -87,12 +89,13 @@
     spawn-at-startup "xwayland-satellite"
 
     environment {
-        XDG_CURRENT_DESKTOP "niri"
-        MOZ_ENABLE_WAYLAND  "1"
-        QT_QPA_PLATFORM     "wayland"
-        ELECTRON_OZONE_PLATFORM_HINT "wayland"
-        GTK_USE_PORTAL "1"
-    }
+    XDG_CURRENT_DESKTOP "niri"
+    MOZ_ENABLE_WAYLAND  "1"
+    QT_QPA_PLATFORM     "wayland"
+    ELECTRON_OZONE_PLATFORM_HINT "wayland"
+    GTK_USE_PORTAL "1"
+    QML2_IMPORT_PATH "${pkgs.kdePackages.kirigami}/lib/qt-6/qml:${pkgs.kdePackages.libplasma}/lib/qt-6/qml"
+}
 
     prefer-no-csd
     hotkey-overlay { 
@@ -219,5 +222,9 @@
         match app-id=r#"^org\.wezfurlong\.wezterm$"#
         default-column-width {}
     }
+    spawn-at-startup "${inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/noctalia-shell"
+spawn-at-startup "${pkgs.swww}/bin/swww-daemon"
+spawn-at-startup "${pkgs.xwayland-satellite}/bin/xwayland-satellite"
   '';
+
 }

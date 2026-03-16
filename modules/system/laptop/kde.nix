@@ -28,4 +28,10 @@
   (catppuccin-papirus-folders.override { flavor = "mocha"; accent = "mauve"; })
   (catppuccin-kvantum.override     { variant = "mocha"; accent = "mauve"; })
 ];
+environment.sessionVariables = {
+  QML2_IMPORT_PATH = lib.makeSearchPath "lib/qt-6/qml" (with pkgs; [
+    kdePackages.kirigami
+    kdePackages.libplasma
+  ]);
+};
 }
