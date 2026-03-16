@@ -222,9 +222,6 @@
         match app-id=r#"^org\.wezfurlong\.wezterm$"#
         default-column-width {}
     }
-    spawn-at-startup "${inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/noctalia-shell"
-spawn-at-startup "${pkgs.swww}/bin/swww-daemon"
-spawn-at-startup "${pkgs.xwayland-satellite}/bin/xwayland-satellite"
   '';
 
 }
