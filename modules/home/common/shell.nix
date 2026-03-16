@@ -5,11 +5,11 @@
     enable = true;
     shellAliases = {
       # Theme testing (desktop only, harmless on laptop)
-      sweet      = "sudo nixos-rebuild test   --flake ~/simonos/#sweet";
-      nordic     = "sudo nixos-rebuild test   --flake ~/simonos/#nordic";
-      dracula    = "sudo nixos-rebuild test   --flake ~/simonos/#dracula";
-      catppuccin = "sudo nixos-rebuild test   --flake ~/simonos/#catppuccin";
-      dragonized = "sudo nixos-rebuild test   --flake ~/simonos/#dragonized";
+      sweet      = "sudo nixos-rebuild test   --flake ~/simonos/#sweet --impure";
+      nordic     = "sudo nixos-rebuild test   --flake ~/simonos/#nordic --impure";
+      dracula    = "sudo nixos-rebuild test   --flake ~/simonos/#dracula --impure";
+      catppuccin = "sudo nixos-rebuild test   --flake ~/simonos/#catppuccin --impure";
+      dragonized = "sudo nixos-rebuild test   --flake ~/simonos/#dragonized --impure";
 
       # Permanent switch
       set-sweet      = "sudo nixos-rebuild switch --flake ~/simonos/#sweet --impure";

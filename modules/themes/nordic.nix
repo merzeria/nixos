@@ -1,4 +1,4 @@
-{ pkgs, lib, isLaptop ... }:
+{ pkgs, lib, isLaptop, ... }:
 
 let
   myWidgets = [

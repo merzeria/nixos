@@ -17,9 +17,11 @@ noctalia = {
   url = "github:noctalia-dev/noctalia-shell";
   inputs.nixpkgs.follows = "nixpkgs";
 };
+      lsfg-vk-flake.url = "github:pabloaul/lsfg-vk-flake/main";
+      lsfg-vk-flake.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, home-manager, plasma-manager, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, plasma-manager, lsfg-vk-flake, ... }@inputs:
     let
       system   = "x86_64-linux";
       username = "simon";
@@ -37,6 +39,7 @@ noctalia = {
             home-manager.extraSpecialArgs   = { inherit inputs themeName; isLaptop = false; };
             home-manager.users.${username}  = import ./modules/home/desktop;
           }
+          lsfg-vk-flake.nixosModules.default
         ];
       };
 
