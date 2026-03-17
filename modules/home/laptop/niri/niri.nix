@@ -30,9 +30,6 @@
 
     layout {
         gaps 8
-        struts {
-        top 0
-        }
         preset-column-widths {
             proportion 0.5
             proportion 0.667
@@ -109,12 +106,12 @@
         Mod+Return { spawn "kitty"; }
         Mod+T      { spawn "kitty"; }
         Mod+Space  { spawn "rofi" "-show" "drun"; }
-        Mod+B      { spawn "floorp"; }
+        Mod+B      { spawn "brave"; }
         Mod+V      { spawn "pwvucontrol"; }
 
         // Overview / hotkey help
         Mod+O               { toggle-overview; }
-        Mod+F1     { show-hotkey-overlay; }
+        Mod+Z     { show-hotkey-overlay; }
 
         // Window management
         Mod+Q         { close-window; }

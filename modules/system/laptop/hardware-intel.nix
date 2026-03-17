@@ -61,7 +61,8 @@
     gdm.fprintAuth   = lib.mkForce true;
     sudo.fprintAuth  = lib.mkForce true;
   };
-
+  # Disable Gnome keyring:
+  services.gnome.gnome-keyring.enable = false;
   # KDE mousepad settings
   services.libinput = {
   enable = true;
