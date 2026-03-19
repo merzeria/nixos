@@ -6,8 +6,7 @@
 
     displayManager = {
       gdm = {
-        enable         = true;
-        wayland.enable = true;
+        enable = true;
       };
       # Autologin to GNOME when using this config.
       # Niri is still available as a session in the GDM session picker.
