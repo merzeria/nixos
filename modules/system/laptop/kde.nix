@@ -35,4 +35,6 @@ environment.sessionVariables = {
     kdePackages.libplasma
   ]);
 };
+# Disable Gnome keyring:
+  services.gnome.gnome-keyring.enable = false;
 }

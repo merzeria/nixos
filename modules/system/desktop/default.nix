@@ -1,9 +1,10 @@
-{ ... }:
+{ desktopType ? "kde", ... }:
 
 {
   imports = [
     ./hardware-nvidia.nix
-    ./plasma.nix
     ./gaming.nix
-  ];
+  ] ++ (if desktopType == "gnome"
+        then [ ./gnome.nix ]
+        else [ ./plasma.nix ]);
 }
