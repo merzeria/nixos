@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, inputs, ... }: {
   home.packages = with pkgs; [
     kitty
     wl-clipboard
@@ -29,8 +29,7 @@
     }
 
     layout {
-        gaps 8
-
+        gaps 4
         preset-column-widths {
             proportion 0.5
             proportion 0.667
@@ -87,12 +86,13 @@
     spawn-at-startup "xwayland-satellite"
 
     environment {
-        XDG_CURRENT_DESKTOP "niri"
-        MOZ_ENABLE_WAYLAND  "1"
-        QT_QPA_PLATFORM     "wayland"
-        ELECTRON_OZONE_PLATFORM_HINT "wayland"
-        GTK_USE_PORTAL "1"
-    }
+    XDG_CURRENT_DESKTOP "niri"
+    MOZ_ENABLE_WAYLAND  "1"
+    QT_QPA_PLATFORM     "wayland"
+    ELECTRON_OZONE_PLATFORM_HINT "wayland"
+    GTK_USE_PORTAL "1"
+    QML2_IMPORT_PATH "${pkgs.kdePackages.kirigami}/lib/qt-6/qml:${pkgs.kdePackages.libplasma}/lib/qt-6/qml"
+}
 
     prefer-no-csd
     hotkey-overlay { 
@@ -106,12 +106,12 @@
         Mod+Return { spawn "kitty"; }
         Mod+T      { spawn "kitty"; }
         Mod+Space  { spawn "rofi" "-show" "drun"; }
-        Mod+B      { spawn "floorp"; }
+        Mod+B      { spawn "brave"; }
         Mod+V      { spawn "pwvucontrol"; }
 
         // Overview / hotkey help
         Mod+O               { toggle-overview; }
-        Mod+F1     { show-hotkey-overlay; }
+        Mod+Z     { show-hotkey-overlay; }
 
         // Window management
         Mod+Q         { close-window; }
@@ -220,4 +220,5 @@
         default-column-width {}
     }
   '';
+
 }

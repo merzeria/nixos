@@ -12,13 +12,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
-    
-noctalia = {
-  url = "github:noctalia-dev/noctalia-shell";
-  inputs.nixpkgs.follows = "nixpkgs";
-};
-      lsfg-vk-flake.url = "github:pabloaul/lsfg-vk-flake/main";
-      lsfg-vk-flake.inputs.nixpkgs.follows = "nixpkgs";
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    lsfg-vk-flake.url = "github:pabloaul/lsfg-vk-flake/main";
+    lsfg-vk-flake.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { self, nixpkgs, home-manager, plasma-manager, lsfg-vk-flake, ... }@inputs:
@@ -26,54 +25,78 @@ noctalia = {
       system   = "x86_64-linux";
       username = "simon";
 
-      # Desktop: KDE + themes + GNOME specialisation + NVIDIA + gaming
-      mkDesktop = themeName: nixpkgs.lib.nixosSystem {
-        inherit system;
-        specialArgs = { inherit inputs themeName; isLaptop = false; };
-        modules = [
-          ./hosts/desktop
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs      = true;
-            home-manager.useUserPackages    = true;
-            home-manager.extraSpecialArgs   = { inherit inputs themeName; isLaptop = false; };
-            home-manager.users.${username}  = import ./modules/home/desktop;
-          }
-          lsfg-vk-flake.nixosModules.default
-        ];
-      };
+      # ──────────────────────────────────────────────────────
+      # Desktop builder
+      # desktopType = "kde" (default) | "gnome"
+      # themeName   = only meaningful for KDE configs
+      # ──────────────────────────────────────────────────────
+      mkDesktop = { themeName, desktopType ? "kde" }:
+        nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs themeName desktopType; isLaptop = false; };
+          modules = [
+            ./hosts/desktop
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs      = true;
+              home-manager.useUserPackages    = true;
+              home-manager.extraSpecialArgs   = { inherit inputs themeName desktopType; isLaptop = false; };
+              home-manager.users.${username}  =
+                if desktopType == "gnome"
+                then import ./modules/home/desktop/gnome
+                else import ./modules/home/desktop;
+            }
+            lsfg-vk-flake.nixosModules.default
+          ];
+        };
 
-      # Laptop: Intel iGPU + TLP
-      mkLaptop = themeName: nixpkgs.lib.nixosSystem {
-        inherit system;
-        specialArgs = { inherit inputs themeName; isLaptop = true; };
-        modules = [
-          ./hosts/laptop
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs      = true;
-            home-manager.useUserPackages    = true;
-            home-manager.extraSpecialArgs   = { inherit inputs themeName; isLaptop = true; };
-            home-manager.users.${username}  = import ./modules/home/laptop;
-          }
-        ];
-      };
+      # ──────────────────────────────────────────────────────
+      # Laptop builder
+      # desktopType = "kde" (default) | "gnome"
+      # Niri is always present regardless of desktopType
+      # ──────────────────────────────────────────────────────
+      mkLaptop = { themeName, desktopType ? "kde" }:
+        nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs themeName desktopType; isLaptop = true; };
+          modules = [
+            ./hosts/laptop
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs      = true;
+              home-manager.useUserPackages    = true;
+              home-manager.extraSpecialArgs   = { inherit inputs themeName desktopType; isLaptop = true; };
+              home-manager.users.${username}  =
+                if desktopType == "gnome"
+                then import ./modules/home/laptop/gnome
+                else import ./modules/home/laptop;
+            }
+          ];
+        };
 
     in {
       nixosConfigurations = {
-        # Desktop themes — switch with e.g. set-catppuccin
-        sweet      = mkDesktop "sweet";
-        nordic     = mkDesktop "nordic";
-        dracula    = mkDesktop "dracula";
-        catppuccin = mkDesktop "catppuccin";
-        dragonized = mkDesktop "dragonized";
+        # ── Desktop: KDE themes ──────────────────────────────
+        sweet      = mkDesktop { themeName = "sweet";      };
+        nordic     = mkDesktop { themeName = "nordic";     };
+        dracula    = mkDesktop { themeName = "dracula";    };
+        catppuccin = mkDesktop { themeName = "catppuccin"; };
+        dragonized = mkDesktop { themeName = "dragonized"; };
 
-        # Laptop
-        laptop-sweet      = mkLaptop "sweet";
-        laptop-nordic     = mkLaptop "nordic";
-        laptop-dracula    = mkLaptop "dracula";
-        laptop-catppuccin = mkLaptop "catppuccin";
-        laptop-dragonized = mkLaptop "dragonized";
+        # ── Desktop: GNOME ───────────────────────────────────
+        # themeName is passed but ignored by the GNOME home module;
+        # it satisfies the specialArgs contract without causing issues.
+        desktop-gnome = mkDesktop { themeName = "catppuccin"; desktopType = "gnome"; };
+
+        # ── Laptop: KDE themes ───────────────────────────────
+        laptop-sweet      = mkLaptop { themeName = "sweet";      };
+        laptop-nordic     = mkLaptop { themeName = "nordic";     };
+        laptop-dracula    = mkLaptop { themeName = "dracula";    };
+        laptop-catppuccin = mkLaptop { themeName = "catppuccin"; };
+        laptop-dragonized = mkLaptop { themeName = "dragonized"; };
+
+        # ── Laptop: GNOME (Niri still available as a session) ─
+        laptop-gnome = mkLaptop { themeName = "catppuccin"; desktopType = "gnome"; };
       };
     };
 }

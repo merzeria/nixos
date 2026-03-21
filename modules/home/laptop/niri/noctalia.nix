@@ -114,7 +114,7 @@
       manualSunrise               = "06:30";
       manualSunset                = "18:30";
       matugenSchemeType           = "scheme-fruit-salad";
-      predefinedScheme            = "Eldritch";
+      predefinedScheme            = "Catppuccin";
       schedulingMode              = "off";
       useWallpaperColors          = false;
     };

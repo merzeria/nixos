@@ -4,37 +4,46 @@
   programs.zsh = {
     enable = true;
     shellAliases = {
-      # Theme testing (desktop only, harmless on laptop)
-      sweet      = "sudo nixos-rebuild test   --flake ~/simonos/#sweet --impure";
-      nordic     = "sudo nixos-rebuild test   --flake ~/simonos/#nordic --impure";
-      dracula    = "sudo nixos-rebuild test   --flake ~/simonos/#dracula --impure";
+      # ── Desktop: KDE theme testing ───────────────────────
+      sweet      = "sudo nixos-rebuild test   --flake ~/simonos/#sweet      --impure";
+      nordic     = "sudo nixos-rebuild test   --flake ~/simonos/#nordic     --impure";
+      dracula    = "sudo nixos-rebuild test   --flake ~/simonos/#dracula    --impure";
       catppuccin = "sudo nixos-rebuild test   --flake ~/simonos/#catppuccin --impure";
       dragonized = "sudo nixos-rebuild test   --flake ~/simonos/#dragonized --impure";
 
-      # Permanent switch
-      set-sweet      = "sudo nixos-rebuild switch --flake ~/simonos/#sweet --impure";
-      set-nordic     = "sudo nixos-rebuild switch --flake ~/simonos/#nordic --impure";
-      set-dracula    = "sudo nixos-rebuild switch --flake ~/simonos/#dracula --impure";
+      # ── Desktop: KDE permanent switch ────────────────────
+      set-sweet      = "sudo nixos-rebuild switch --flake ~/simonos/#sweet      --impure";
+      set-nordic     = "sudo nixos-rebuild switch --flake ~/simonos/#nordic     --impure";
+      set-dracula    = "sudo nixos-rebuild switch --flake ~/simonos/#dracula    --impure";
       set-catppuccin = "sudo nixos-rebuild switch --flake ~/simonos/#catppuccin --impure";
       set-dragonized = "sudo nixos-rebuild switch --flake ~/simonos/#dragonized --impure";
 
-      # Laptop theme testing
-    laptop-sweet      = "sudo nixos-rebuild test   --flake ~/simonos/#laptop-sweet      --impure";
-    laptop-nordic     = "sudo nixos-rebuild test   --flake ~/simonos/#laptop-nordic     --impure";
-    laptop-dracula    = "sudo nixos-rebuild test   --flake ~/simonos/#laptop-dracula    --impure";
-    laptop-catppuccin = "sudo nixos-rebuild test   --flake ~/simonos/#laptop-catppuccin --impure";
-    laptop-dragonized = "sudo nixos-rebuild test   --flake ~/simonos/#laptop-dragonized --impure";
+      # ── Desktop: GNOME ───────────────────────────────────
+      gnome     = "sudo nixos-rebuild test   --flake ~/simonos/#desktop-gnome --impure";
+      set-gnome = "sudo nixos-rebuild switch --flake ~/simonos/#desktop-gnome --impure";
 
-    # Laptop permanent switch
-    set-laptop-sweet      = "sudo nixos-rebuild switch --flake ~/simonos/#laptop-sweet      --impure";
-    set-laptop-nordic     = "sudo nixos-rebuild switch --flake ~/simonos/#laptop-nordic     --impure";
-    set-laptop-dracula    = "sudo nixos-rebuild switch --flake ~/simonos/#laptop-dracula    --impure";
-    set-laptop-catppuccin = "sudo nixos-rebuild switch --flake ~/simonos/#laptop-catppuccin --impure";
-    set-laptop-dragonized = "sudo nixos-rebuild switch --flake ~/simonos/#laptop-dragonized --impure";
+      # ── Laptop: KDE theme testing ────────────────────────
+      laptop-sweet      = "sudo nixos-rebuild test   --flake ~/simonos/#laptop-sweet      --impure";
+      laptop-nordic     = "sudo nixos-rebuild test   --flake ~/simonos/#laptop-nordic     --impure";
+      laptop-dracula    = "sudo nixos-rebuild test   --flake ~/simonos/#laptop-dracula    --impure";
+      laptop-catppuccin = "sudo nixos-rebuild test   --flake ~/simonos/#laptop-catppuccin --impure";
+      laptop-dragonized = "sudo nixos-rebuild test   --flake ~/simonos/#laptop-dragonized --impure";
 
-      # Maintenance
+      # ── Laptop: KDE permanent switch ─────────────────────
+      set-laptop-sweet      = "sudo nixos-rebuild switch --flake ~/simonos/#laptop-sweet      --impure";
+      set-laptop-nordic     = "sudo nixos-rebuild switch --flake ~/simonos/#laptop-nordic     --impure";
+      set-laptop-dracula    = "sudo nixos-rebuild switch --flake ~/simonos/#laptop-dracula    --impure";
+      set-laptop-catppuccin = "sudo nixos-rebuild switch --flake ~/simonos/#laptop-catppuccin --impure";
+      set-laptop-dragonized = "sudo nixos-rebuild switch --flake ~/simonos/#laptop-dragonized --impure";
+
+      # ── Laptop: GNOME (Niri still available as a session) ─
+      laptop-gnome     = "sudo nixos-rebuild test   --flake ~/simonos/#laptop-gnome --impure";
+      set-laptop-gnome = "sudo nixos-rebuild switch --flake ~/simonos/#laptop-gnome --impure";
+
+      # ── Maintenance ──────────────────────────────────────
       clean-nix    = "sudo nix-collect-garbage -d && nix-collect-garbage -d && nix-store --optimise";
       push-nix     = "cd ~/simonos && git add . && git commit -m \"Update: $(date +%Y-%m-%d)\" && git push";
+      pull-nix     = "cd ~/simonos && git pull origin main --rebase";
       restic-check = "sudo B2_ACCOUNT_ID=$(grep B2_ACCOUNT_ID /etc/nixos/restic-b2-env | cut -d'\"' -f2) B2_ACCOUNT_KEY=$(grep B2_ACCOUNT_KEY /etc/nixos/restic-b2-env | cut -d'\"' -f2) restic -r b2:nixosbackup:simonos-backup -p /etc/nixos/restic-password snapshots";
     };
 

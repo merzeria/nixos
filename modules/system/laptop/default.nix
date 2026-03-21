@@ -1,10 +1,11 @@
-{ ... }:
+{ desktopType ? "kde", ... }:
 
 {
   imports = [
     ./hardware-intel.nix
     ./gaming.nix
     ./niri.nix
-    ./kde.nix
-  ];
+  ] ++ (if desktopType == "gnome"
+        then [ ./gnome.nix ]
+        else [ ./kde.nix ]);
 }

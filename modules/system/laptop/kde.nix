@@ -5,14 +5,16 @@
   services.flatpak.enable              = true;
 
  services.displayManager = {
-    plasma-login-manager = {
-      enable          = true;
-    };
-    autoLogin = {
-      enable = true;
-      user   = "simon";
-    };
+  sddm = {
+    enable         = true;
+    wayland.enable = true;
+  settings.Autologin.Session ="niri";
   };
+  autoLogin = {
+    enable = true;
+    user   = "simon";
+  };
+};
 
   qt = {
     enable        = true;
@@ -27,4 +29,12 @@
   (catppuccin-papirus-folders.override { flavor = "mocha"; accent = "mauve"; })
   (catppuccin-kvantum.override     { variant = "mocha"; accent = "mauve"; })
 ];
+environment.sessionVariables = {
+  QML2_IMPORT_PATH = lib.makeSearchPath "lib/qt-6/qml" (with pkgs; [
+    kdePackages.kirigami
+    kdePackages.libplasma
+  ]);
+};
+# Disable Gnome keyring:
+  services.gnome.gnome-keyring.enable = false;
 }
