@@ -39,6 +39,9 @@
       # ── Laptop: GNOME (Niri still available as a session) ─
       laptop-gnome     = "sudo nixos-rebuild test   --flake ~/simonos/#laptop-gnome --impure";
       set-laptop-gnome = "sudo nixos-rebuild switch --flake ~/simonos/#laptop-gnome --impure";
+      # ── Laptop: hyprland (Niri still available as a session) ─
+      laptop-hyprland     = "sudo nixos-rebuild test   --flake ~/simonos/#laptop-hyprland --impure";
+      set-laptop-hyprland = "sudo nixos-rebuild switch --flake ~/simonos/#laptop-hyprland --impure";
 
       # ── Maintenance ──────────────────────────────────────
       clean-nix    = "sudo nix-collect-garbage -d && nix-collect-garbage -d && nix-store --optimise";
