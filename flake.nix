@@ -25,11 +25,6 @@
       system   = "x86_64-linux";
       username = "simon";
 
-      # ──────────────────────────────────────────────────────
-      # Desktop builder
-      # desktopType = "kde" (default) | "gnome"
-      # themeName   = only meaningful for KDE configs
-      # ──────────────────────────────────────────────────────
       mkDesktop = { themeName, desktopType ? "kde" }:
         nixpkgs.lib.nixosSystem {
           inherit system;
@@ -42,19 +37,14 @@
               home-manager.useUserPackages    = true;
               home-manager.extraSpecialArgs   = { inherit inputs themeName desktopType; isLaptop = false; };
               home-manager.users.${username}  =
-                if desktopType == "gnome"
-                then import ./modules/home/desktop/gnome
+                if desktopType == "gnome"         then import ./modules/home/desktop/gnome
+                else if desktopType == "hyprland" then import ./modules/home/desktop/hyprland
                 else import ./modules/home/desktop;
             }
             lsfg-vk-flake.nixosModules.default
           ];
         };
 
-      # ──────────────────────────────────────────────────────
-      # Laptop builder
-      # desktopType = "kde" (default) | "gnome"
-      # Niri is always present regardless of desktopType
-      # ──────────────────────────────────────────────────────
       mkLaptop = { themeName, desktopType ? "kde" }:
         nixpkgs.lib.nixosSystem {
           inherit system;
@@ -67,8 +57,8 @@
               home-manager.useUserPackages    = true;
               home-manager.extraSpecialArgs   = { inherit inputs themeName desktopType; isLaptop = true; };
               home-manager.users.${username}  =
-                if desktopType == "gnome"
-                then import ./modules/home/laptop/gnome
+                if desktopType == "gnome"         then import ./modules/home/laptop/gnome
+                else if desktopType == "hyprland" then import ./modules/home/laptop/hyprland
                 else import ./modules/home/laptop;
             }
           ];
@@ -76,27 +66,23 @@
 
     in {
       nixosConfigurations = {
-        # ── Desktop: KDE themes ──────────────────────────────
         sweet      = mkDesktop { themeName = "sweet";      };
         nordic     = mkDesktop { themeName = "nordic";     };
         dracula    = mkDesktop { themeName = "dracula";    };
         catppuccin = mkDesktop { themeName = "catppuccin"; };
         dragonized = mkDesktop { themeName = "dragonized"; };
 
-        # ── Desktop: GNOME ───────────────────────────────────
-        # themeName is passed but ignored by the GNOME home module;
-        # it satisfies the specialArgs contract without causing issues.
-        desktop-gnome = mkDesktop { themeName = "catppuccin"; desktopType = "gnome"; };
+        desktop-gnome    = mkDesktop { themeName = "catppuccin"; desktopType = "gnome"; };
+        desktop-hyprland = mkDesktop { themeName = "catppuccin"; desktopType = "hyprland"; };
 
-        # ── Laptop: KDE themes ───────────────────────────────
         laptop-sweet      = mkLaptop { themeName = "sweet";      };
         laptop-nordic     = mkLaptop { themeName = "nordic";     };
         laptop-dracula    = mkLaptop { themeName = "dracula";    };
         laptop-catppuccin = mkLaptop { themeName = "catppuccin"; };
         laptop-dragonized = mkLaptop { themeName = "dragonized"; };
 
-        # ── Laptop: GNOME (Niri still available as a session) ─
-        laptop-gnome = mkLaptop { themeName = "catppuccin"; desktopType = "gnome"; };
+        laptop-gnome     = mkLaptop { themeName = "catppuccin"; desktopType = "gnome"; };
+        laptop-hyprland  = mkLaptop { themeName = "catppuccin"; desktopType = "hyprland"; };
       };
     };
 }
