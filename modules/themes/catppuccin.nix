@@ -14,7 +14,7 @@
     };
     configFile = {
       "kdeglobals"."General"."widgetStyle" = "kvantum";
-      "kvantumrc"."General"."theme" = "catppuccin-mocha-mauve";
+      # "kvantumrc"."General"."theme" = "catppuccin-mocha-mauve";
       "konsolerc"."Desktop Entry"."DefaultProfile" = "simon.profile";
       "konsolerc"."MainWindow"."ProfileList" = "simon.profile";
     };
@@ -56,5 +56,10 @@
   home.packages = with pkgs; [
     catppuccin-cursors.mochaMauve
     nixos-artwork.wallpapers.catppuccin-mocha
+    pkgs.catppuccin
   ];
+  xdg.configFile."Kvantum/kvantum.kvconfig".text = ''
+  [General]
+  theme=catppuccin-mocha-mauve
+'';
 }

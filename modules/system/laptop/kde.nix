@@ -8,7 +8,7 @@
   sddm = {
     enable         = true;
     wayland.enable = true;
-  settings.Autologin.Session ="niri";
+  settings.Autologin.Session ="plasma";
   };
   autoLogin = {
     enable = true;
