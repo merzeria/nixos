@@ -54,6 +54,7 @@
   environment.systemPackages = with pkgs; [
     gamescope-wsi
     goverlay
+    protontricks
     kdePackages.qtstyleplugin-kvantum
     libsForQt5.qtstyleplugin-kvantum
     catppuccin-sddm-corners
