@@ -1,9 +1,9 @@
 { pkgs, ... }:
 {
   imports = [
-    ../../packages.nix
-    ../../shell.nix
-    ../../git.nix
+    ../../common
+    ../packages.nix
+    ../desktop.nix
     # add other shared home modules you want
   ];
 
