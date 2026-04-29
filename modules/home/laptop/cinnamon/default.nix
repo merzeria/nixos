@@ -2,7 +2,6 @@
 {
   imports = [
     ../../common
-    ../packages.nix
     ../desktop.nix
     # add other shared home modules you want
   ];
