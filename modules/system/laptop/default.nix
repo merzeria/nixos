@@ -7,7 +7,7 @@
     ./niri.nix
   ] ++ (if desktopType == "gnome"
         then [ ./gnome.nix ]
-        else if desktopType == "hyprland"
-        then [ ./hyprland.nix ]
+        else if desktopType == "cinnamon"
+        then [ ./cinnamon.nix ]
         else [ ./kde.nix ]);
 }

@@ -38,7 +38,7 @@
               home-manager.extraSpecialArgs   = { inherit inputs themeName desktopType; isLaptop = false; };
               home-manager.users.${username}  =
                 if desktopType == "gnome"         then import ./modules/home/desktop/gnome
-                else if desktopType == "hyprland" then import ./modules/home/desktop/hyprland
+                else if desktopType == "cinnamon" then import ./modules/home/desktop/cinnamon
                 else import ./modules/home/desktop;
             }
             lsfg-vk-flake.nixosModules.default
@@ -58,7 +58,7 @@
               home-manager.extraSpecialArgs   = { inherit inputs themeName desktopType; isLaptop = true; };
               home-manager.users.${username}  =
                 if desktopType == "gnome"         then import ./modules/home/laptop/gnome
-                else if desktopType == "hyprland" then import ./modules/home/laptop/hyprland
+                else if desktopType == "cinnamon" then import ./modules/home/laptop/cinnamon
                 else import ./modules/home/laptop;
             }
           ];
@@ -73,7 +73,7 @@
         dragonized = mkDesktop { themeName = "dragonized"; };
 
         desktop-gnome    = mkDesktop { themeName = "catppuccin"; desktopType = "gnome"; };
-        desktop-hyprland = mkDesktop { themeName = "catppuccin"; desktopType = "hyprland"; };
+        desktop-cinnamon = mkDesktop { themeName = "catppuccin"; desktopType = "cinnamon"; };
 
         laptop-sweet      = mkLaptop { themeName = "sweet";      };
         laptop-nordic     = mkLaptop { themeName = "nordic";     };
@@ -82,7 +82,7 @@
         laptop-dragonized = mkLaptop { themeName = "dragonized"; };
 
         laptop-gnome     = mkLaptop { themeName = "catppuccin"; desktopType = "gnome"; };
-        laptop-hyprland  = mkLaptop { themeName = "catppuccin"; desktopType = "hyprland"; };
+        laptop-cinnamon  = mkLaptop { themeName = "catppuccin"; desktopType = "cinnamon"; };
       };
     };
 }
