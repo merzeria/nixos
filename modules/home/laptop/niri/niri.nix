@@ -82,7 +82,7 @@
     }
 
     spawn-at-startup "noctalia-shell"
-    spawn-at-startup "swww-daemon"
+    spawn-at-startup "awww-daemon"
     spawn-at-startup "xwayland-satellite"
 
     environment {
