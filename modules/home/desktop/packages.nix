@@ -3,7 +3,7 @@
 {
   home.packages = with pkgs; [
     pcsx2
-    lutris
+    #lutris
   ];
 
   programs.mangohud = {
