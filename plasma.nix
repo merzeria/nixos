@@ -29,6 +29,7 @@
       "EdgeBarrier"."EdgeBarrier"                           = { value = 0;     immutable = true; };
       "EdgeBarrier"."CornerBarrier"                         = { value = false; immutable = true; };
       "ScreenEdges".Enabled                                 = { value = false; immutable = true; };
+      "Xwayland".XwaylandEavesdrops = "AllKeysAndButtons";
     };
 
     configFile.kscreenlockerrc.Daemon.Autolock    = false;
